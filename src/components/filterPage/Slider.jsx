@@ -53,7 +53,7 @@ const Slider = () => {
                                     boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.2)",
                                     borderRadius: "50%",
                                     outline: "none",
-                                    transition: "all 0.2s ease", 
+                                    transition: "all 0.05s ease", 
                                     // transform: isDragged ? "scale(1.4)" : "scale(1)", 
                                 }}
                             />

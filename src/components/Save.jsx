@@ -4,7 +4,7 @@ import { useAuth } from "./authContext";
 import { useNavigate } from "react-router-dom";
 
 
-const Save = ({ recipeId }) => {
+const Save = ({ recipeId, position }) => {
 
     const { setNeedsUpdate, isAuthenticated } = useAuth();
 
@@ -92,7 +92,7 @@ const Save = ({ recipeId }) => {
 
 
     return (
-        <div className="group  absolute top-[-20px] left-2 py-[9px] flex items-center justify-center size-10 z-50 rounded-full shadow-save-btn  bg-white text-[#5E5DC0] hover:bg-[#FFEB00] hover:text-white duration-300">
+        <div className={`absolute ${position} group py-[9px] flex items-center justify-center size-10 z-50 rounded-full shadow-save-btn  bg-white text-[#5E5DC0] hover:bg-[#FFEB00] hover:text-white duration-300`}>
             <svg 
             onClick={(e) => {
                 e.stopPropagation();

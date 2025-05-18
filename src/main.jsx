@@ -50,7 +50,8 @@ const router = createBrowserRouter([
       },
       {
         path: 'compte',
-        element: <ProtectedRoute><Compte /></ProtectedRoute> 
+        // element: <ProtectedRoute><Compte /></ProtectedRoute> 
+        element: <Compte /> 
       },
       {
         path: 'login',
@@ -66,7 +67,8 @@ const router = createBrowserRouter([
       },
       {
         path: 'recipe/:id',
-        element: <ProtectedRoute><Recipe /></ProtectedRoute>
+        // element: <ProtectedRoute><Recipe /></ProtectedRoute>
+        element: <Recipe />
       },
       {
         path: 'about_us',

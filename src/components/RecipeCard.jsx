@@ -21,7 +21,7 @@ const RecipeCard = ({ el }) => {
             {/* card info------------------------------------------------------- */}
             <div className="relative p-2">
 
-                <Save recipeId={recipeId} />
+                    <Save recipeId={recipeId} position="top-[-20px] left-2" />
 
                 <p className="text-[#262F82] text-[22px] w-64 h-16 overflow-hidden line-clamp-2 leading-7 mt-2">{el.title}</p>
 

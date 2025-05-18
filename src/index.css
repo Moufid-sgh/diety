@@ -111,10 +111,10 @@ body {
   }
 
   .inputRange {
-    background: linear-gradient(90deg, #FF4C29 0%, #E2E9F1 100%);
+    background: #FFEB00;
     box-shadow: 0px 1px 2px 0px rgba(94, 93, 192, 1) inset;
     border-radius: 8px;
-    height: 8px;
+    height: 6px;
   }
 
   /* like animation */
@@ -141,7 +141,7 @@ body {
   /* Style du thumb -----------*/
   input[type="range"]::-webkit-slider-thumb {
     appearance: none;
-    width: 50px;
+    width: 30px;
     height: 30px;
     background: #fff;
     border: 2px solid rgba(243, 240, 227, 1);
@@ -244,4 +244,10 @@ body {
   .l-shadow {
     box-shadow: 4px 4px 24px 0px rgba(24, 49, 83, 0.12);
   }
+}
+
+
+/* shadow progress bar */
+.shadow-progress {
+  box-shadow: 0px 2px 6px 1px rgba(218, 218, 218, 0.33) inset;
 }
