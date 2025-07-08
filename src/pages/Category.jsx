@@ -2,7 +2,8 @@ import { useParams } from 'react-router-dom'
 import { useState, useEffect } from "react"
 import RecipeCard from '@/components/RecipeCard'
 import ErrorBoundary from '@/components/ErrorBoundary'
-import { motion, AnimatePresence } from "framer-motion";
+import RecipeCardSkeleton from '@/components/RecipeCardSkeleton'
+
 
 const Category = () => {
 
@@ -15,7 +16,9 @@ const Category = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`https://yahalawa.net/api/orange/recipesByCategories/${category}`);
+                await new Promise(resolve => setTimeout(resolve, 3000));
+                // const response = await fetch(`https://yahalawa.net/api/diet/recipesByCategories/${category}`);
+                const response = await fetch(`http://localhost:3000/api/diet/recipesByCategories/${category}`);
 
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
@@ -34,13 +37,6 @@ const Category = () => {
     }, [category]);
 
 
-    //animation   
-    const AnimationSettings = {
-        transition: { duration: 0.5, ease: "easeInOut" },
-        initial: { opacity: 0, y: 20 },
-        animate: { opacity: 1, y: 0 },
-        exit: { opacity: 0, y: -20 }
-    };
 
 
     return (
@@ -48,27 +44,24 @@ const Category = () => {
 
 
             <div className='text-end w-full'>
-                <p className='text-orange text-3xl mb-2'>{category}</p>
+                <p className='text-[#7695FF] text-3xl mb-2'>{category}</p>
                 <p className='rubriqueTitle'></p>
             </div>
 
 
             <section className="flex flex-wrap justify-center items-start w-full my-6">
                 <ErrorBoundary>
-                    <AnimatePresence>
-                        {
-                            Array.isArray(data) && data.map((el) => {
-                                return (
-                                    <motion.div
-                                        key={el.id}
-                                        {...AnimationSettings}
-                                    >
-                                        <RecipeCard el={el} />
-                                    </motion.div>
-                                )
-                            })
-                        }
-                    </AnimatePresence>
+                    {loading ? (
+                        <>
+                            {[...Array(6)].map((_, i) => (
+                                <RecipeCardSkeleton key={i} />
+                            ))}
+                        </>
+                    ) : (
+                        Array.isArray(data) && data.map((el) => (
+                            <RecipeCard key={el.id} el={el} />
+                        ))
+                    )}
                 </ErrorBoundary>
             </section>
 

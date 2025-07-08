@@ -12,7 +12,7 @@ const GetRandomRecipes = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://yahalawa.net/api/orange/randomRecipes');
+        const response = await fetch('https://yahalawa.net/api/diet/randomRecipes');
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }

@@ -50,7 +50,7 @@ const Page = () => {
                     const data = await response.json();
                     console.log(data)
 
-                    if(data.status === "error") {
+                    if (data.status === "error") {
                         return toast.error("بيانات اعتماد غير صالحة");
                     }
 
@@ -62,7 +62,7 @@ const Page = () => {
                         localStorage.setItem('token', data.token);
                         setIsAuthenticated(true);
                         navigate(from, { replace: true });
-                    } 
+                    }
 
                 } catch (error) {
                     console.log(error)
@@ -74,27 +74,26 @@ const Page = () => {
 
 
     return (
-        <main className="flex min-h-screen flex-col items-center px-3 md:px-8 lg:px-32 py-8">
-
-
-            <div className="flex items-center w-full">
-                <p className="bg-[#18315366] w-full h-[1px]"></p>
-                <h1 dir="rtl" className="text-[#5E5DC0] text-2xl mx-8 whitespace-nowrap"> مرحبا بيك ! </h1>
-                <p className="bg-[#18315366] w-full h-[1px]"></p>
-            </div>
-
-
+        <main className="h-screen w-full md:bg-[url('/login-bg.webp')] bg-cover bg-center bg-no-repeat flex min-h-screen flex-col items-center justify-center px-3 md:px-8 lg:px-32">
+            
             <form dir="rtl" className="mt-8 w-full flex justfiy-start">
-                <section className="lg:w-72">
+                <section className="bg-white lg:w-96 p-8 rounded-[12px] border border-blue">
+
+                    <div className="flex items-center w-full">
+                        <p className="bg-[#18315366] w-full h-[1px]"></p>
+                        <h1 dir="rtl" className="text-[#5E5DC0] text-2xl mx-4 whitespace-nowrap"> مرحبا بيك ! </h1>
+                        <p className="bg-[#18315366] w-full h-[1px]"></p>
+                    </div>
+
                     <div className="relative mt-5">
-                        <label className="text-[#262F82]" htmlFor="number">رقم الجوال Ooredoo</label>
+                        <label className="text-[#262F82]" htmlFor="number">رقم الجوال إتصالات تونس</label>
                         <input
                             id="number"
                             type="number"
                             name="phone_number"
                             onChange={(e) => setPhone(e.target.value)}
-                            placeholder="رقم الجوال Ooredoo"
-                            className="bg-[#007AFF0D] border border-[#262F82] rounded-[3px] py-3 px-4 mt-1 w-full outline-none focus:ring-[0.8px] focus:ring-ringblue"
+                            placeholder="رقم الجوال إتصالات تونس"
+                            className="bg-[#007AFF0D] border border-[#262F82] rounded-[8px] py-3 px-4 mt-1 w-full outline-none focus:ring-[0.8px] focus:ring-ringblue"
                         />
                         <svg className="absolute left-4 top-[45px] text-[#262F82] size-4" width="12" height="19" viewBox="0 0 12 19" fill="#262F82" xmlns="http://www.w3.org/2000/svg">
                             <path d="M8.25 18.2852H3.75C1.68225 18.2852 0 16.6029 0 14.5352V4.03516C0 1.96741 1.68225 0.285156 3.75 0.285156H8.25C10.3177 0.285156 12 1.96741 12 4.03516V14.5352C12 16.6029 10.3177 18.2852 8.25 18.2852ZM3.75 1.78516C2.5095 1.78516 1.5 2.79466 1.5 4.03516V14.5352C1.5 15.7757 2.5095 16.7852 3.75 16.7852H8.25C9.4905 16.7852 10.5 15.7757 10.5 14.5352V4.03516C10.5 2.79466 9.4905 1.78516 8.25 1.78516H3.75ZM7.5 14.5352C7.5 14.1212 7.164 13.7852 6.75 13.7852H5.25C4.836 13.7852 4.5 14.1212 4.5 14.5352C4.5 14.9492 4.836 15.2852 5.25 15.2852H6.75C7.164 15.2852 7.5 14.9492 7.5 14.5352Z" fill="#262F82" />
@@ -109,7 +108,7 @@ const Page = () => {
                             name="password"
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder="كلمة المرور"
-                            className="bg-[#007AFF0D] border border-[#262F82] rounded-md py-3 px-4 mt-1 w-full outline-none focus:ring-[0.8px] focus:ring-ringblue"
+                            className="bg-[#007AFF0D] border border-[#262F82] rounded-[8px] py-3 px-4 mt-1 w-full outline-none focus:ring-[0.8px] focus:ring-ringblue"
                         />
                         <div onClick={() => setShowPassword(!showPassword)} className="absolute left-4 top-[41px] text-[#262F82] cursor-pointer">
                             {showPassword ?
@@ -122,24 +121,23 @@ const Page = () => {
                         </div>
                     </div>
 
-                    <div className="mt-5 mb-4">
+                    <div className="mt-5 mb-2">
                         <input id="terms" type="checkbox" onChange={(e) => setIsChecked(e.target.checked)} className="w-4 h-4 cursor-pointer" required />
-                        <label htmlFor="terms" className="mr-2">لقد قرأت و وافقت على </label>
-                        <Link to="" className="text-[#007AFF]">الشروط العامة للبيع والإستخدام خدمة يّامي صنافة.</Link>
+                        <label htmlFor="terms" className="mr-2">الحفاظ على تسجيل الدخول</label>
                     </div>
 
 
                     <Link to="" className="text-[#007AFF]">نسيت كلمة المرور ؟</Link>
 
 
-                    <button onClick={handleSignIn} disabled={isPending} className="flex items-center justify-center px-5 py-2.5 mt-8 bg-orange hover:bg-[#31363F3B] active:bg-black duration-500 text-white rounded-[3px] w-full group overflow-hidden font-medium">
+                    <button onClick={handleSignIn} disabled={isPending} className="flex items-center justify-center px-5 py-2.5 mt-8 bg-[#BAC1CB] hover:bg-[#183153] active:bg-blue duration-500 text-white rounded-[12px] w-full group overflow-hidden font-medium">
                         <span>الدخول</span>
                         {isPending && <p className="miniLoader mr-2"></p>}
                     </button>
 
                     <div className="text-[#007AFF] mt-4 ">
                         <p>تحب تستمتع بالخدمة ؟</p>
-                        <p className="text-lg pt-1">إتصل بالرقم التالي #0*000*</p>
+                        <p className="text-lg border border-blue rounded-[8px] p-2 mt-2">إتصل بالرقم التالي #0*000*</p>
                     </div>
                 </section>
             </form>

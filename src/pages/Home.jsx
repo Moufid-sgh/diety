@@ -4,6 +4,8 @@ import ErrorBoundary from "@/components/ErrorBoundary"
 import RubriqueFilter from "@/components/RubriqueFilter"
 
 import { secondTagFilter, thirdTagFilter, fourthTagFilter } from "@/lib/tagsData"
+import ChooseMeal from "@/components/ChooseMeal"
+
 
 const Home = () => {
 
@@ -14,23 +16,27 @@ const Home = () => {
 
       <Rubrique />
 
-      <RubriqueFilter 
+      {/* choose your meal filter---------------- */}
+      <ChooseMeal />
+
+      {/* filter--------------------------------- */}
+      <RubriqueFilter
         title="وصفات حسب المكونات"
         data={secondTagFilter}
         kcal={false}
-       />
+      />
 
-      <RubriqueFilter 
+      <RubriqueFilter
         title="وصفات حسب طريقة التحضير"
         data={thirdTagFilter}
         kcal={false}
-       />
+      />
 
-      <RubriqueFilter 
+      <RubriqueFilter
         title="وصفات حسب النظام الغذائي"
         data={fourthTagFilter}
         kcal={false}
-       />
+      />
 
       {/* أكيد باش يعجبوك --------------------------------------------------------- */}
       <section className="w-full mb-16 mt-6">

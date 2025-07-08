@@ -12,8 +12,8 @@ const RecipeCard = ({ el }) => {
         <div dir="rtl" className="relative w-[280px] mx-10 my-6 group cardShadow">
 
             <Link to={`/recipe/${el.id}`}>
-                <div className="relative overflow-hidden">
-                    <ImageComponent src={el.imgPath} className="object-cover w-[280px] h-[350px] cardBorder group-hover:scale-[1.02] transition-all duration-500" />
+                <div className="relative overflow-hidden cardBorder">
+                    <ImageComponent src={el.imgPath} className="object-cover w-[280px] h-[350px] group-hover:scale-[1.02] transition-all duration-500" />
                 </div>
             </Link>
 
@@ -21,7 +21,7 @@ const RecipeCard = ({ el }) => {
             {/* card info------------------------------------------------------- */}
             <div className="relative p-2">
 
-                    <Save recipeId={recipeId} position="top-[-20px] left-2" />
+                <Save recipeId={recipeId} position="top-[-20px] left-2" />
 
                 <p className="text-[#262F82] text-[22px] w-64 h-16 overflow-hidden line-clamp-2 leading-7 mt-2">{el.title}</p>
 
@@ -49,7 +49,7 @@ const RecipeCard = ({ el }) => {
                         </svg>
 
                         <span className="mx-1.5">Kcal</span>
-                        <span>0000</span>
+                        <span>{el.kcal}</span>
                     </div>
 
                     <div className="flex items-center mr-6">

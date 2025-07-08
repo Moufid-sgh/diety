@@ -14,7 +14,7 @@ const Rubrique = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://yahalawa.net/api/orange/topic');
+                const response = await fetch('https://yahalawa.net/api/diet/topic');
 
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
