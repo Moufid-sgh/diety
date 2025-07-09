@@ -84,7 +84,7 @@ const Recipe = () => {
                 preload="metadata">
                 <source src={data?.videoPath} type="video/mp4" />
               </video>
-              <Save recipeId={data?.id} position="bottom-[-20px] left-4" />
+              <Save recipeId={data?.id} position="top-1.5 left-1.5" />
             </div>
           </div>}
 
@@ -181,7 +181,7 @@ const Recipe = () => {
               preload="metadata">
               <source src={data?.videoPath} type="video/mp4" />
             </video>
-            <Save recipeId={data?.id} position="bottom-[-20px] left-4" />
+            <Save recipeId={data?.id} position="top-1.5 left-1.5" />
           </div>
         </div>}
       </div>

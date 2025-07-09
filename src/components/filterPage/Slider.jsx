@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Range } from "react-range";
 
-const Slider = () => {
-    const [values, setValues] = useState([200, 500]);
+const Slider = ({ values, setValues }) => {
 
     return (
         <div className="w-full">
@@ -24,41 +23,46 @@ const Slider = () => {
                         min={0}
                         max={700}
                         values={values}
-                        onChange={(values) => setValues(values)}
-                        renderTrack={({ props, children }) => (
-                            <div
-                                {...props}
-                                style={{
-                                    ...props.style,
-                                    height: "6px",
-                                    width: "100%",
-                                    background: "linear-gradient(270deg, #FF4545 50%, #00E3FF 100%)",
-                                    boxShadow: "0 4px 4px rgba(38, 47, 130, 0.25) inset",
-                                    borderRadius: "12px",
-
-                                }}
-                            >
-                                {children}
-                            </div>
-                        )}
-                        renderThumb={({ props, isDragged }) => (
-                            <div
-                                {...props}
-                                style={{
-                                    ...props.style,
-                                    height: "28px",
-                                    width: "28px",
-                                    backgroundColor: "#fff",
-                                    border: "1px solid #E2E9F1",
-                                    boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.2)",
-                                    borderRadius: "50%",
-                                    outline: "none",
-                                    transition: "all 0.05s ease", 
-                                    // transform: isDragged ? "scale(1.4)" : "scale(1)", 
-                                }}
-                            />
-                        )}
-
+                        onChange={setValues}
+                        renderTrack={({ props, children }) => {
+                            const { key, ...rest } = props;
+                            return (
+                                <div
+                                    key={key}
+                                    {...rest}
+                                    style={{
+                                        ...props.style,
+                                        height: "6px",
+                                        width: "100%",
+                                        background: "linear-gradient(270deg, #FF4545 50%, #00E3FF 100%)",
+                                        boxShadow: "0 4px 4px rgba(38, 47, 130, 0.25) inset",
+                                        borderRadius: "12px",
+                                    }}
+                                >
+                                    {children}
+                                </div>
+                            );
+                        }}
+                        renderThumb={({ props, isDragged }) => {
+                            const { key, ...rest } = props;
+                            return (
+                                <div
+                                    key={key}
+                                    {...rest}
+                                    style={{
+                                        ...props.style,
+                                        height: "28px",
+                                        width: "28px",
+                                        backgroundColor: "#fff",
+                                        border: "1px solid #E2E9F1",
+                                        boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.2)",
+                                        borderRadius: "50%",
+                                        outline: "none",
+                                        transition: "all 0.05s ease",
+                                    }}
+                                />
+                            );
+                        }}
                     />
                 </div>
             </div>

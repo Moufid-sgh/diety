@@ -14,7 +14,7 @@ const RubriqueFilter = ({ title, data, kcal }) => {
                 {data.map((el, index) => {
                     return (
                         <Link key={index} to={`/category/${el.info}`}>
-                            <div className="flex flex-col items-start justify-center my-6 ml-8 size-28 text-[#262F82] p-3 rounded-[12px] shadow-lg border border-slate-200">
+                            <div className="flex flex-col items-start justify-center my-6 ml-8 size-28 text-[#262F82] p-3 rounded-[12px] shadow-lg border border-slate-200 hover:bg-[#7695FF1A] active:bg-[#262F82] active:text-white transition duration-300">
                                 <img src={el.icon} alt="" className="size-10" />
                                 <div className="leading-5 text-lg mt-3">
                                     <p>{el.info}</p>

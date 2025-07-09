@@ -8,7 +8,6 @@ import { dataKcal } from "@/lib/tagsData";
 const Rubrique = () => {
 
     const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -23,7 +22,7 @@ const Rubrique = () => {
                 const result = await response.json();
                 setData(result);
             } catch (error) {
-                setError(error.message);
+                console.log(error)
             } finally {
                 setLoading(false);
             }
@@ -51,7 +50,7 @@ const Rubrique = () => {
                             <RecipeCarousel recipes={el.recipe} />
 
 
-                            {/* TAGS PART--------------------------------------------------------- */}
+                            {/* kcal filter--------------------------------------------------------- */}
                             {
                                 index === 1 &&
                                 <RubriqueFilter

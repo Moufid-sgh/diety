@@ -12,7 +12,7 @@ const ChooseMealCard = ({ el }) => {
             {/* </Link> */}
 
             {/* card info------------------------------------------------------- */}
-            <div className="border-r-8 border-blue rounded-b-[12px] p-2 w-64 h-20 flex items-center">
+            <div className="border-r-8 border-blue group-hover:border-[#FFEB00] group-active:border-[#262F82] rounded-b-[12px] p-2 w-64 h-20 flex items-center duration-300">
                 <p className="text-[#262F82] text-[22px] overflow-hidden line-clamp-2 leading-7">{el.title}</p>
             </div>
         </div>

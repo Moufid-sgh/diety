@@ -51,10 +51,12 @@ const Category = () => {
 
     return (
         <main className="flex min-h-screen flex-col items-center px-3 md:px-8 lg:px-32 py-8">
+            
             <div className='text-end w-full'>
                 <p className='text-[#7695FF] text-3xl mb-2'>{category}</p>
                 <p className='rubriqueTitle'></p>
             </div>
+
             <section className="flex flex-wrap justify-center items-start w-full my-6">
                 <ErrorBoundary>
                     {loading && page === 0 ? (
@@ -63,22 +65,28 @@ const Category = () => {
                                 <RecipeCardSkeleton key={i} />
                             ))}
                         </>
-                    ) : (
-                        Array.isArray(data) && data.map((el) => (
+                    ) : Array.isArray(data) && data.length > 0 ? (
+                        data.map((el) => (
                             <RecipeCard key={el.id} el={el} />
                         ))
+                    ) : (
+                        <div className="w-full text-center text-2xl my-16">
+                            لم يتم العثور على وصفات
+                        </div>
                     )}
                 </ErrorBoundary>
             </section>
-            {hasMore && !loading && (
+
+            {hasMore && !loading && data.length > 0 && (
                 <button
                     onClick={handleLoadMore}
-                    className="px-6 py-2 my-8 bg-blue text-white rounded-[4px] hover:bg-[#007AFFCC] duration-300 transition"
+                    className="px-6 py-2 my-8 bg-blue text-white rounded-[8px] hover:bg-[#007AFFCC] duration-300 transition"
                 >
                     تحميل المزيد
 
                 </button>
             )}
+
             {loading && page > 0 && (
                 <div className="mb-8">
                     {[...Array(3)].map((_, i) => (
@@ -86,6 +94,7 @@ const Category = () => {
                     ))}
                 </div>
             )}
+
         </main>
     )
 }

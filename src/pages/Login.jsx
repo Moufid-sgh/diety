@@ -130,7 +130,7 @@ const Page = () => {
                     <Link to="" className="text-[#007AFF]">نسيت كلمة المرور ؟</Link>
 
 
-                    <button onClick={handleSignIn} disabled={isPending} className="flex items-center justify-center px-5 py-2.5 mt-8 bg-[#BAC1CB] hover:bg-[#183153] active:bg-blue duration-500 text-white rounded-[12px] w-full group overflow-hidden font-medium">
+                    <button onClick={handleSignIn} disabled={isPending} className="flex items-center justify-center px-5 py-2.5 mt-8 bg-[#BAC1CB] hover:bg-[#183153] active:bg-blue duration-500 text-white rounded-[8px] w-full group overflow-hidden font-medium">
                         <span>الدخول</span>
                         {isPending && <p className="miniLoader mr-2"></p>}
                     </button>

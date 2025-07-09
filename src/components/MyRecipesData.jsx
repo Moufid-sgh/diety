@@ -158,7 +158,7 @@ const MyRecipesData = () => {
       {
         Array.isArray(data) && (data.length === 0 && !loading) &&
         <div className='flex justify-end  w-full mt-10'>
-          <p className="text-end bg-[#5684EB] text-white rounded-[4px]  p-2 lg:w-2/3">
+          <p className="text-end bg-[#5684EB] text-white rounded-[8px]  p-2 lg:w-2/3">
             حاليا، الموندو متاعك، كيفاش أنقولوها، ومن غير نبزيات ... مافيهوش وصفات.
             متنساش، الوصفات إلي يعجبوك أعمل عليهم جام، هكة يتسجللك ديراكت. أوكي
           </p>

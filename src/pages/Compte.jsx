@@ -143,12 +143,12 @@ const Page = () => {
                     </div>
 
 
-                    <button onClick={editUser} disabled={isPending} className="flex items-center justify-center px-5 py-2.5 mt-8 bg-blue hover:bg-[#31363F3B] active:bg-black duration-500 text-white rounded-[12px] w-full group overflow-hidden font-medium">
+                    <button onClick={editUser} disabled={isPending} className="flex items-center justify-center px-5 py-2.5 mt-8 bg-blue hover:bg-[#31363F3B] active:bg-black duration-500 text-white rounded-[8px] w-full group overflow-hidden font-medium">
                         <span>تغير الاسم</span>
                         {isPending && <p className="miniLoader mr-2"></p>}
                     </button>
 
-                    <button onClick={logout} className="flex items-center justify-center px-5 py-2.5 mt-8 bg-[#BAC1CB] hover:bg-orange active:bg-black duration-500 text-white rounded-[12px] w-full group overflow-hidden font-medium">
+                    <button onClick={logout} className="flex items-center justify-center px-5 py-2.5 mt-8 bg-[#BAC1CB] hover:bg-orange active:bg-black duration-500 text-white rounded-[8px] w-full group overflow-hidden font-medium">
                         <span>تسجيل الخروج</span>
                     </button>
                 </section>
