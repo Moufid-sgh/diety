@@ -1,7 +1,9 @@
-import { useState, useTransition, useEffect, useRef } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "@/components/authContext"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import Spinner from "@/components/Spinner"
+
 
 const Page = () => {
 
@@ -9,7 +11,7 @@ const Page = () => {
 
     const navigate = useNavigate()
 
-    const [isPending, startTransition] = useTransition()
+     const [loading, setLoading] = useState(false);
 
     //get user name
     const nameRef = useRef()
@@ -25,11 +27,10 @@ const Page = () => {
     }, [name])
 
 
-    const editUser = (e) => {
-
+    const editUser = async (e) => {
+        setLoading(true);
         e.preventDefault()
 
-        startTransition(async () => {
             try {
                 const response = await fetch("https://yahalawa.net/api/orange/editUser", {
                     method: "POST",
@@ -50,7 +51,9 @@ const Page = () => {
             } catch (error) {
                 console.log(error)
             }
-        })
+            finally {
+                setLoading(false);
+            }
     };
 
 
@@ -143,9 +146,9 @@ const Page = () => {
                     </div>
 
 
-                    <button onClick={editUser} disabled={isPending} className="flex items-center justify-center px-5 py-2.5 mt-8 bg-blue hover:bg-[#31363F3B] active:bg-black duration-500 text-white rounded-[8px] w-full group overflow-hidden font-medium">
-                        <span>تغير الاسم</span>
-                        {isPending && <p className="miniLoader mr-2"></p>}
+                    <button onClick={editUser} disabled={loading} className="flex items-center justify-center px-5 py-2.5  mt-8 bg-blue hover:bg-[#31363F3B] active:bg-black duration-500 text-white rounded-[8px] w-full group overflow-hidden font-medium">
+                        <span className="ml-1.5">تغير الاسم</span>
+                        {loading && <Spinner />}
                     </button>
 
                     <button onClick={logout} className="flex items-center justify-center px-5 py-2.5 mt-8 bg-[#BAC1CB] hover:bg-orange active:bg-black duration-500 text-white rounded-[8px] w-full group overflow-hidden font-medium">

@@ -2,12 +2,15 @@ import { useState, useEffect } from 'react';
 import logo from "/logo.png"
 import HamburgerMenu from "./HamburgerMenu"
 import Menu from "./Menu"
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import SearchBar from '../SearchBar';
 
 
 
 const Navbar = () => {
+
+  const location = useLocation();
+  const isFilterPage = location.pathname === '/filter';
 
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -46,7 +49,7 @@ const Navbar = () => {
           <div>
             <SearchBar />
 
-            <div className='bg-blue rounded-[4px] w-full md:w-96 p-1 hover:bg-[#007AFFCC] duration-300'>
+            {!isFilterPage && <div className='bg-blue rounded-[4px] w-full md:w-96 p-1 hover:bg-[#007AFFCC] duration-300'>
               <Link to="/filter" className='flex items-center'>
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3.00233 6.75073H5.73805C6.278 8.73737 8.32619 9.91016 10.3128 9.37022C11.5888 9.02342 12.5855 8.02668 12.9323 6.75073H25.0001C25.5523 6.75073 26 6.30307 26 5.75084C26 5.19862 25.5523 4.75096 25.0001 4.75096H12.9323C12.3924 2.76427 10.3442 1.59148 8.35754 2.13142C7.08159 2.47822 6.08485 3.47496 5.73805 4.75091H3.00233C2.4501 4.75091 2.00244 5.19857 2.00244 5.7508C2.00244 6.30302 2.4501 6.75073 3.00233 6.75073Z" fill="#FFFA39" />
@@ -55,7 +58,7 @@ const Navbar = () => {
               </svg>
               <span className='text-white text-[24px] mr-2'>فلتري وأختار على كيفك</span>
               </Link>
-            </div>
+            </div> }
           </div>
         </div>
         {/* -------------------------------------------------- */}

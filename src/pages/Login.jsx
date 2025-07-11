@@ -1,7 +1,9 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { useState, useTransition } from "react"
+import { useState } from "react"
 import { toast } from "sonner"
 import { useAuth } from "@/components/authContext"
+import Spinner from "@/components/Spinner"
+
 
 const Page = () => {
 
@@ -9,7 +11,7 @@ const Page = () => {
 
     const [showPassword, setShowPassword] = useState(false)
 
-    const [isPending, startTransition] = useTransition()
+    const [loading, setLoading] = useState(false);
 
     const [phone_number, setPhone] = useState('')
     const [password, setPassword] = useState('')
@@ -20,10 +22,9 @@ const Page = () => {
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
 
-    function handleSignIn(e) {
+    const handleSignIn = async (e) => {
         e.preventDefault();
-
-        startTransition(async () => {
+        setLoading(true);
 
             if (!phone_number || !password) {
                 return toast.info('من فضلك، تأكد من ملء جميع الحقول لإكمال تسجيل الدخول')
@@ -66,9 +67,10 @@ const Page = () => {
 
                 } catch (error) {
                     console.log(error)
+                } finally {
+                    setLoading(false);
                 }
             }
-        })
     };
 
 
@@ -130,9 +132,9 @@ const Page = () => {
                     <Link to="" className="text-[#007AFF]">نسيت كلمة المرور ؟</Link>
 
 
-                    <button onClick={handleSignIn} disabled={isPending} className="flex items-center justify-center px-5 py-2.5 mt-8 bg-[#BAC1CB] hover:bg-[#183153] active:bg-blue duration-500 text-white rounded-[8px] w-full group overflow-hidden font-medium">
-                        <span>الدخول</span>
-                        {isPending && <p className="miniLoader mr-2"></p>}
+                    <button onClick={handleSignIn} disabled={loading} className="flex items-center justify-center px-5 py-2.5 mt-8 bg-[#BAC1CB] hover:bg-[#183153] active:bg-blue duration-500 text-white rounded-[8px] w-full group overflow-hidden font-medium">
+                        <span className="ml-1.5">الدخول</span>
+                        {!loading && <Spinner />}
                     </button>
 
                     <div className="text-[#007AFF] mt-4 ">
