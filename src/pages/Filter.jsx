@@ -5,7 +5,7 @@ import Spinner from "@/components/Spinner"
 import { firstTagFilter, secondTagFilter, thirdTagFilter, fourthTagFilter } from "@/lib/tagsData"
 import { useState, useEffect } from "react"
 
-const TAKE = 3
+const TAKE = 12
 
 const Filter = () => {
 
@@ -86,7 +86,7 @@ const Filter = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:3000/api/diet/filter", {
+      const res = await fetch("https://yahalawa.net/api/diet/filter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -144,11 +144,11 @@ const Filter = () => {
 
 
   return (
-    <main className="flex min-h-screen flex-col items-center px-3 md:px-8 lg:px-32 lg:py-8 py-4">
+    <main className="flex min-h-screen flex-col items-center px-3 md:px-8 lg:px-32 lg:py-8 py-4 mt-24 lg:mt-0">
 
       {/* dispaly result & reset -------------*/}
       {submitted &&
-        <div className="flex flex-col lg:flex-row items-end lg:items-center justify-end w-full space-y-2 lg:space-x-8 mb-6">
+        <div className="flex flex-col lg:flex-row items-end lg:items-center justify-end w-full space-y-2 lg:space-y-0 lg:space-x-8 mb-6">
           <button onClick={resetFilters} className='flex items-center bg-blue rounded-[4px] w-[220px] py-2 px-6 hover:bg-[#007AFFCC] duration-300'>
             <span className='text-white text-lg mr-3'>إعادة كل الاختيارات</span>
             <svg width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -225,7 +225,7 @@ const Filter = () => {
           <span>بحث</span>
         </button>
         :
-        <div className="flex flex-col lg:flex-row items-end lg:items-center justify-end w-full space-y-2 lg:space-x-8">
+        <div className="flex flex-col lg:flex-row items-end lg:items-center justify-end w-full space-y-2 lg:space-y-0 lg:space-x-8">
           <button onClick={resetFilters} className='flex items-center bg-blue rounded-[4px] w-[220px] py-2 px-6 hover:bg-[#007AFFCC] duration-300'>
             <span className='text-white text-lg mr-3'>إعادة كل الاختيارات</span>
             <svg width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">

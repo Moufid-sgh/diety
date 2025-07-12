@@ -32,7 +32,7 @@ const Page = () => {
         e.preventDefault()
 
             try {
-                const response = await fetch("https://yahalawa.net/api/orange/editUser", {
+                const response = await fetch("https://yahalawa.net/api/diet/editUser", {
                     method: "POST",
                     credentials: 'include',
                     headers: {

@@ -65,13 +65,12 @@ const Recipe = () => {
     fetchData();
   }, [id]);
 
-  console.log("data", data);
 
   const sortedSteps = data?.steps.sort((a, b) => a.step - b.step);
 
 
   return (
-    <main className="flex min-h-screen flex-col px-6 md:px-8 lg:px-32 pb-12 pt-3">
+    <main className="flex min-h-screen flex-col px-6 md:px-8 lg:px-32 pb-12 pt-3 mt-20 lg:mt-0">
       <div dir="rtl" ref={containerRef} className="lg:flex items-start justify-between mt-8 pb-4 w-full">
         <section className="flex-1">
 
@@ -147,7 +146,7 @@ const Recipe = () => {
                 <ProgressBar
                   title="الألياف"
                   subtitle="Fiber | Fibres"
-                  value={25}
+                  value={data?.fibres}
                   className="[&>div]:bg-[#06E775]"
                 />
               </div>

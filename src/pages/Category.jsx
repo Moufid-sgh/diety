@@ -18,7 +18,7 @@ const Category = () => {
         try {
             setLoading(true)
             const response = await fetch(
-                `http://localhost:3000/api/diet/recipesByCategories/${category}?skip=${currentPage * TAKE}&take=${TAKE}`
+                `https://yahalawa.net/api/diet/recipesByCategories/${category}?skip=${currentPage * TAKE}&take=${TAKE}`
             )
             if (!response.ok) throw new Error('Failed to fetch data')
             const result = await response.json()
@@ -48,9 +48,10 @@ const Category = () => {
         setPage(nextPage)
         fetchData(nextPage)
     }
+    
 
     return (
-        <main className="flex min-h-screen flex-col items-center px-3 md:px-8 lg:px-32 py-8">
+        <main className="flex min-h-screen flex-col items-center px-3 md:px-8 lg:px-32 py-8 mt-24 lg:mt-0">
             
             <div className='text-end w-full'>
                 <p className='text-[#7695FF] text-3xl mb-2'>{category}</p>

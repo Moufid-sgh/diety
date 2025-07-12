@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import logo from "/logo.png"
 import HamburgerMenu from "./HamburgerMenu"
 import Menu from "./Menu"
@@ -9,40 +8,15 @@ import SearchBar from '../SearchBar';
 
 const Navbar = () => {
 
+  //hadnle displaying the filter btn
   const location = useLocation();
   const isFilterPage = location.pathname === '/filter';
-
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://yahalawa.net/api/orange/menu');
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-
-        const result = await response.json();
-        setData(result)
-      } catch (error) {
-        setError(error.message)
-      } finally {
-        setLoading(false)
-      }
-    };
-
-    fetchData();
-  }, []);
-
 
 
   return (
     <nav dir="rtl">
 
-      <div className="flex items-start justify-between px-3 md:px-8 lg:px-32 lg:py-8 pt-8 z-50">
+      <div className="flex items-start justify-between px-3 md:px-8 lg:px-32 py-6 lg:py-8 pt-8 z-50 fixed lg:relative top-0 left-0 right-0 bg-white shadow-sm lg:shadow-none">
         {/* for desktop--------------------------------------- */}
         <div className="hidden lg:flex flex-col">
           <Menu />
@@ -64,7 +38,7 @@ const Navbar = () => {
         {/* -------------------------------------------------- */}
 
         {/* for mobile-------------------------------------- */}
-        <HamburgerMenu data={data} />
+        <HamburgerMenu  />
         {/* ------------------------------------------------ */}
 
 

@@ -28,7 +28,7 @@ const ChooseMeal = () => {
 
 
     return (
-        <div className="w-full my-10">
+        <div className="w-full mb-10">
             {/* title---------- */}
             <div className='text-end mb-6'>
                 <p className='text-[#7695FF] text-3xl mb-2'>اختار وجبتك</p>

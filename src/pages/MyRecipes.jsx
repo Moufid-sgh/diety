@@ -10,7 +10,7 @@ const MyRecipes = () => {
 
       <div className='w-full'>
         <div className='text-end'>
-          <p className='text-orange text-3xl mb-2'>الموندو متاعي</p>
+          <p className='text-[#7695FF] text-3xl mb-2'>وصفاتي المفضلة</p>
           <p className='rubriqueTitle'></p>
         </div>
         <p className="bg-blueTitle w-full h-[1px]"></p>

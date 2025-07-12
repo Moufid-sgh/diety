@@ -36,7 +36,7 @@ const Page = () => {
 
             else {
                 try {
-                    const response = await fetch("https://yahalawa.net/api/orange/auth", {
+                    const response = await fetch("https://yahalawa.net/api/diet/auth", {
                         method: "POST",
                         credentials: 'include',
                         headers: {
@@ -46,11 +46,9 @@ const Page = () => {
                         body: JSON.stringify({ phone_number, password }),
                     });
 
-
-
                     const data = await response.json();
-                    console.log(data)
 
+                    
                     if (data.status === "error") {
                         return toast.error("بيانات اعتماد غير صالحة");
                     }
@@ -134,7 +132,7 @@ const Page = () => {
 
                     <button onClick={handleSignIn} disabled={loading} className="flex items-center justify-center px-5 py-2.5 mt-8 bg-[#BAC1CB] hover:bg-[#183153] active:bg-blue duration-500 text-white rounded-[8px] w-full group overflow-hidden font-medium">
                         <span className="ml-1.5">الدخول</span>
-                        {!loading && <Spinner />}
+                        {loading && <Spinner />}
                     </button>
 
                     <div className="text-[#007AFF] mt-4 ">

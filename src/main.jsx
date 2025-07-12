@@ -16,6 +16,7 @@ import Notifications from './pages/Notifications';
 import { useAuth, AuthProvider } from './components/authContext';
 import YummyTerms from './pages/Yummy_terms';
 import Filter from './pages/Filter';
+import Search from './pages/Search';
 
 
 
@@ -50,8 +51,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'compte',
-        // element: <ProtectedRoute><Compte /></ProtectedRoute> 
-        element: <Compte /> 
+        element: <ProtectedRoute><Compte /></ProtectedRoute> 
       },
       {
         path: 'login',
@@ -66,9 +66,12 @@ const router = createBrowserRouter([
         element: <Category />
       },
       {
+        path: 'search/:search',
+        element: <Search />
+      },
+      {
         path: 'recipe/:id',
-        // element: <ProtectedRoute><Recipe /></ProtectedRoute>
-        element: <Recipe />
+        element: <ProtectedRoute><Recipe /></ProtectedRoute>
       },
       {
         path: 'about_us',

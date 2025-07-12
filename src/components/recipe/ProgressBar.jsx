@@ -1,7 +1,7 @@
 import { Progress } from "@/components/ui/progress"
 
 const ProgressBar = ({ title, subtitle, value, className }) => {
-    console.log("calue", value);
+    
     return (
         <div className='flex items-center mb-2'>
             <div>
