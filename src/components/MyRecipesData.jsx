@@ -1,12 +1,11 @@
 
 import { useEffect, useState } from 'react'
 import RecipeCard from "@/components/RecipeCard"
-import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from './authContext';
 import ErrorBoundary from './ErrorBoundary';
 
 
-const MyRecipesData = () => {
+const MyRecipesData = ({ selected }) => {
 
 
   //get user id-------------------------------------------//
@@ -25,6 +24,7 @@ const MyRecipesData = () => {
 
   const { needsUpdate } = useAuth();
 
+
   useEffect(() => {
 
     if (!userId) return;
@@ -32,7 +32,7 @@ const MyRecipesData = () => {
     const getMySaves = async () => {
 
       try {
-        const response = await fetch("https://yahalawa.net/api/orange/mySaves", {
+        const response = await fetch("https://yahalawa.net/api/diet/mySaves", {
           method: "POST",
           credentials: 'include',
           headers: {
@@ -56,6 +56,15 @@ const MyRecipesData = () => {
   }, [userId, needsUpdate])
 
 
+  //get filtred recipes based on selected tags-----------//
+  const filteredData = selected
+  ? data.filter(el =>
+      Array.isArray(el.typeRepas) &&
+      el.typeRepas.some(rep => selected.includes(rep.title))
+    )
+  : data;
+
+
 
 
   return (
@@ -64,7 +73,7 @@ const MyRecipesData = () => {
       <section className="flex flex-wrap justify-center items-start w-full my-6">
         <ErrorBoundary>
             {
-              data.map((el) => {
+              filteredData.map((el) => {
                 return (
                     <RecipeCard key={el.id} el={el} />
                 )
@@ -75,7 +84,7 @@ const MyRecipesData = () => {
 
 
       {
-        Array.isArray(data) && (data.length === 0 && !loading) &&
+        Array.isArray(filteredData) && (filteredData.length === 0 && !loading) &&
         <div className='flex justify-end  w-full mt-10'>
           <p className="text-end bg-[#5684EB] text-white rounded-[8px]  p-2 lg:w-2/3">
             حاليا، الموندو متاعك، كيفاش أنقولوها، ومن غير نبزيات ... مافيهوش وصفات.

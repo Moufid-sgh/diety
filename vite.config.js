@@ -14,7 +14,6 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ["react", "react-dom"],
-          uiLibs: ["framer-motion"], 
         },
       },
     },

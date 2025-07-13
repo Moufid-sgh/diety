@@ -1,7 +1,10 @@
 import MyRecipesData from "@/components/MyRecipesData"
-
+import MyRecipesFilter from "@/components/MyRecipesFilter";
+import { useState } from "react"
 
 const MyRecipes = () => {
+
+  const [meal, setMeal] = useState("")
 
 
   return (
@@ -16,7 +19,12 @@ const MyRecipes = () => {
         <p className="bg-blueTitle w-full h-[1px]"></p>
       </div>
 
-      <MyRecipesData />
+      <MyRecipesFilter
+        selected={meal}
+        onChange={setMeal}
+      />
+
+      <MyRecipesData selected={meal} />
 
     </main>
   )
