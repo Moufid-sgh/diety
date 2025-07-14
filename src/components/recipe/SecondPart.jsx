@@ -92,8 +92,8 @@ const SecondPart = ({ macro, micro, ingredients, ustensiles, nbr_serves, sortedS
     return (
         <div className="mb-20 lg:w-[80%]">
             <section className="w-full mt-10 lg:mt-0">
-                <div className="flex items-center bg-[#F5F5F5] rounded-[10px] w-fit p-1 text-[18px] md:text-[22px]">
-                    <div className="rounded-[12px] bg-blue text-white px-6 py-1.5 cursor-pointer">
+                <div className="flex items-center justfiy-start bg-[#F5F5F5] rounded-[10px] w-fit p-1 text-[17.5px] md:text-[22px]">
+                    <div className="rounded-[12px] bg-blue text-white px-4 lg:px-6 py-1.5 cursor-pointer whitespace-nowrap">
                         القيم الغذائية
                     </div>
                     <div
@@ -103,7 +103,7 @@ const SecondPart = ({ macro, micro, ingredients, ustensiles, nbr_serves, sortedS
                                 behavior: "smooth"
                             });
                         }}
-                        className="rounded-[12px] text-[#262F82BA] hover:text-white hover:bg-blue mx-4 px-6 py-1.5 cursor-pointer transition-all duration-300">
+                        className="rounded-[12px] text-[#262F82BA] hover:text-white hover:bg-blue mx-1 lg:mx-4 px-4 lg:px-6 py-1.5 cursor-pointer transition-all duration-300">
                         المكونات
                     </div>
                     <div
@@ -113,15 +113,15 @@ const SecondPart = ({ macro, micro, ingredients, ustensiles, nbr_serves, sortedS
                                 behavior: "smooth"
                             });
                         }}
-                        className="rounded-[12px] text-[#262F82BA] px-6 py-1.5 hover:bg-blue hover:text-white transition-all duration-300 cursor-pointer">
+                        className="rounded-[12px] text-[#262F82BA] px-4 lg:px-6 py-1.5 hover:bg-blue hover:text-white transition-all duration-300 cursor-pointer">
                         الطريقة
                     </div>
                 </div>
                 <p className="h-[0.3px] w-full bg-gray"></p>
 
                 <div className="my-8">
-                    <div className="flex items-center">
-                        <svg width="18" height="21" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div className="flex items-start">
+                        <svg className="mt-2 md:mt-3.5 shrink-0" width="18" height="21" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2.41138 14.9398L0.0354176 3.20831C-0.0897236 2.46089 0.120274 1.70148 0.609695 1.12377C1.09912 0.546065 1.81482 0.214355 2.57252 0.214355H14.1429C16.2695 0.214355 18 1.9449 18 4.07144V9.21422C18 11.3408 16.2695 13.0713 14.1429 13.0713H13.7144V14.8944C15.1912 15.2758 16.2857 16.6198 16.2857 18.2141C16.2857 19.6318 15.132 20.7855 13.7144 20.7855H2.57166C1.15397 20.7855 0.000274658 19.6318 0.000274658 18.2141C0.000274658 16.6772 1.01597 15.3736 2.41138 14.9398ZM14.1429 11.357C15.324 11.357 16.2857 10.3953 16.2857 9.21422V4.07144C16.2857 2.89031 15.324 1.92862 14.1429 1.92862H13.7144V11.357H14.1429ZM10.2858 11.357H12.0001V9.64278H10.2858C9.8127 9.64278 9.4287 9.25879 9.4287 8.78565C9.4287 8.31252 9.8127 7.92852 10.2858 7.92852H12.0001V6.21426H10.2858C9.8127 6.21426 9.4287 5.83027 9.4287 5.35713C9.4287 4.884 9.8127 4.5 10.2858 4.5H12.0001V1.92862H2.57252C2.31624 1.92862 2.08396 2.03576 1.91767 2.23204C1.75225 2.42746 1.68453 2.67432 1.72139 2.89717L4.12993 14.7856H12.0001V13.0713H10.2858C9.8127 13.0713 9.4287 12.6873 9.4287 12.2142C9.4287 11.741 9.8127 11.357 10.2858 11.357ZM2.57166 19.0712H13.7144C14.1866 19.0712 14.5715 18.6864 14.5715 18.2141C14.5715 17.2687 13.8026 16.4998 12.8572 16.4998H3.42879C2.48338 16.4998 1.71453 17.2687 1.71453 18.2141C1.71453 18.6864 2.09853 19.0712 2.57166 19.0712Z" fill="#7695FF" />
                         </svg>
                         <p className="text-[32px] text-[#7695FF] mr-2">القيم الغذائية للحصة الواحدة</p>
@@ -160,7 +160,7 @@ const SecondPart = ({ macro, micro, ingredients, ustensiles, nbr_serves, sortedS
 
                 <ul className="list-decimal marker:text-orange text-[#00235B] text-[16px] md:text-[18px] mt-2">
                     {Array.isArray(macro) && macro.map((el) => (
-                        <li key={el.id} className="flex items-center text-darkblue text-[18px] py-2 border-b border-gray space-x-2 lg:space-x-6">
+                        <li key={el.id} className="flex items-center text-darkblue text-[18px] py-2 border-b border-gray space-x-2 lg:space-x-6 white">
                             <p className="w-72">{el.title}</p>
                             <Separator className="w-[0.128rem] h-3.5 bg-[#00235B40]" />
                             <p className="w-24 lg:w-20">{formatNumber(getUpdatedQuantity(el.value))}</p>
@@ -195,8 +195,8 @@ const SecondPart = ({ macro, micro, ingredients, ustensiles, nbr_serves, sortedS
             {(ustensiles && ustensiles.length > 0) &&
                 <section className="w-full mt-16">
                     <div className="my-8">
-                        <div className="flex items-center">
-                            <svg width="18" height="21" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <div className="flex items-start">
+                            <svg className="mt-2 md:mt-3.5 shrink-0" width="18" height="21" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2.41138 14.9398L0.0354176 3.20831C-0.0897236 2.46089 0.120274 1.70148 0.609695 1.12377C1.09912 0.546065 1.81482 0.214355 2.57252 0.214355H14.1429C16.2695 0.214355 18 1.9449 18 4.07144V9.21422C18 11.3408 16.2695 13.0713 14.1429 13.0713H13.7144V14.8944C15.1912 15.2758 16.2857 16.6198 16.2857 18.2141C16.2857 19.6318 15.132 20.7855 13.7144 20.7855H2.57166C1.15397 20.7855 0.000274658 19.6318 0.000274658 18.2141C0.000274658 16.6772 1.01597 15.3736 2.41138 14.9398ZM14.1429 11.357C15.324 11.357 16.2857 10.3953 16.2857 9.21422V4.07144C16.2857 2.89031 15.324 1.92862 14.1429 1.92862H13.7144V11.357H14.1429ZM10.2858 11.357H12.0001V9.64278H10.2858C9.8127 9.64278 9.4287 9.25879 9.4287 8.78565C9.4287 8.31252 9.8127 7.92852 10.2858 7.92852H12.0001V6.21426H10.2858C9.8127 6.21426 9.4287 5.83027 9.4287 5.35713C9.4287 4.884 9.8127 4.5 10.2858 4.5H12.0001V1.92862H2.57252C2.31624 1.92862 2.08396 2.03576 1.91767 2.23204C1.75225 2.42746 1.68453 2.67432 1.72139 2.89717L4.12993 14.7856H12.0001V13.0713H10.2858C9.8127 13.0713 9.4287 12.6873 9.4287 12.2142C9.4287 11.741 9.8127 11.357 10.2858 11.357ZM2.57166 19.0712H13.7144C14.1866 19.0712 14.5715 18.6864 14.5715 18.2141C14.5715 17.2687 13.8026 16.4998 12.8572 16.4998H3.42879C2.48338 16.4998 1.71453 17.2687 1.71453 18.2141C1.71453 18.6864 2.09853 19.0712 2.57166 19.0712Z" fill="#7695FF" />
                             </svg>
                             <p className="text-[32px] text-[#7695FF] mr-2">الأواني</p>
@@ -217,8 +217,8 @@ const SecondPart = ({ macro, micro, ingredients, ustensiles, nbr_serves, sortedS
             {/* ingredients ------------------------------------------------------------- */}
             <section ref={ingRef}>
                 <div className="my-8">
-                    <div className="flex items-center">
-                        <svg width="18" height="21" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div className="flex items-start">
+                        <svg className="mt-2 md:mt-3.5 shrink-0" width="18" height="21" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2.41138 14.9398L0.0354176 3.20831C-0.0897236 2.46089 0.120274 1.70148 0.609695 1.12377C1.09912 0.546065 1.81482 0.214355 2.57252 0.214355H14.1429C16.2695 0.214355 18 1.9449 18 4.07144V9.21422C18 11.3408 16.2695 13.0713 14.1429 13.0713H13.7144V14.8944C15.1912 15.2758 16.2857 16.6198 16.2857 18.2141C16.2857 19.6318 15.132 20.7855 13.7144 20.7855H2.57166C1.15397 20.7855 0.000274658 19.6318 0.000274658 18.2141C0.000274658 16.6772 1.01597 15.3736 2.41138 14.9398ZM14.1429 11.357C15.324 11.357 16.2857 10.3953 16.2857 9.21422V4.07144C16.2857 2.89031 15.324 1.92862 14.1429 1.92862H13.7144V11.357H14.1429ZM10.2858 11.357H12.0001V9.64278H10.2858C9.8127 9.64278 9.4287 9.25879 9.4287 8.78565C9.4287 8.31252 9.8127 7.92852 10.2858 7.92852H12.0001V6.21426H10.2858C9.8127 6.21426 9.4287 5.83027 9.4287 5.35713C9.4287 4.884 9.8127 4.5 10.2858 4.5H12.0001V1.92862H2.57252C2.31624 1.92862 2.08396 2.03576 1.91767 2.23204C1.75225 2.42746 1.68453 2.67432 1.72139 2.89717L4.12993 14.7856H12.0001V13.0713H10.2858C9.8127 13.0713 9.4287 12.6873 9.4287 12.2142C9.4287 11.741 9.8127 11.357 10.2858 11.357ZM2.57166 19.0712H13.7144C14.1866 19.0712 14.5715 18.6864 14.5715 18.2141C14.5715 17.2687 13.8026 16.4998 12.8572 16.4998H3.42879C2.48338 16.4998 1.71453 17.2687 1.71453 18.2141C1.71453 18.6864 2.09853 19.0712 2.57166 19.0712Z" fill="#7695FF" />
                         </svg>
                         <p className="text-[32px] text-[#7695FF] mr-2">المكونات</p>
@@ -276,8 +276,8 @@ const SecondPart = ({ macro, micro, ingredients, ustensiles, nbr_serves, sortedS
             {/* steps--------------------------------------------------------------------- */}
             <section ref={setpsRef} className="w-full mt-16">
                 <div className="my-8">
-                    <div className="flex items-center">
-                        <svg width="18" height="21" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div className="flex items-start">
+                        <svg className="mt-2 md:mt-3.5 shrink-0" width="18" height="21" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2.41138 14.9398L0.0354176 3.20831C-0.0897236 2.46089 0.120274 1.70148 0.609695 1.12377C1.09912 0.546065 1.81482 0.214355 2.57252 0.214355H14.1429C16.2695 0.214355 18 1.9449 18 4.07144V9.21422C18 11.3408 16.2695 13.0713 14.1429 13.0713H13.7144V14.8944C15.1912 15.2758 16.2857 16.6198 16.2857 18.2141C16.2857 19.6318 15.132 20.7855 13.7144 20.7855H2.57166C1.15397 20.7855 0.000274658 19.6318 0.000274658 18.2141C0.000274658 16.6772 1.01597 15.3736 2.41138 14.9398ZM14.1429 11.357C15.324 11.357 16.2857 10.3953 16.2857 9.21422V4.07144C16.2857 2.89031 15.324 1.92862 14.1429 1.92862H13.7144V11.357H14.1429ZM10.2858 11.357H12.0001V9.64278H10.2858C9.8127 9.64278 9.4287 9.25879 9.4287 8.78565C9.4287 8.31252 9.8127 7.92852 10.2858 7.92852H12.0001V6.21426H10.2858C9.8127 6.21426 9.4287 5.83027 9.4287 5.35713C9.4287 4.884 9.8127 4.5 10.2858 4.5H12.0001V1.92862H2.57252C2.31624 1.92862 2.08396 2.03576 1.91767 2.23204C1.75225 2.42746 1.68453 2.67432 1.72139 2.89717L4.12993 14.7856H12.0001V13.0713H10.2858C9.8127 13.0713 9.4287 12.6873 9.4287 12.2142C9.4287 11.741 9.8127 11.357 10.2858 11.357ZM2.57166 19.0712H13.7144C14.1866 19.0712 14.5715 18.6864 14.5715 18.2141C14.5715 17.2687 13.8026 16.4998 12.8572 16.4998H3.42879C2.48338 16.4998 1.71453 17.2687 1.71453 18.2141C1.71453 18.6864 2.09853 19.0712 2.57166 19.0712Z" fill="#7695FF" />
                         </svg>
                         <p className="text-[32px] text-[#7695FF] mr-2">الطريقة</p>

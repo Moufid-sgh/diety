@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
 
         const checkAuth = async () => {
             try {
-                const response = await fetch('https://www.yahalawa.net/api/orange/check-auth', {
+                const response = await fetch('https://www.yahalawa.net/api/diet/check-auth', {
                     credentials: 'include',
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
                 },);
 
                 const data = await response.json();
+                setCurrentName(data.user.name || '');
 
                 setIsAuthenticated(data.isAuthenticated);
 

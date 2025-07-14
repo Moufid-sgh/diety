@@ -9,7 +9,7 @@ const ProgressBar = ({ title, subtitle, value, className }) => {
                 <Progress value={value} className={className} />
                 <span>{subtitle}</span>
             </div>
-           <span className="mr-4">{value} g</span> 
+           <span className="mr-4 whitespace-nowrap">{value} g</span> 
         </div>
     )
 }

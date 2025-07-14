@@ -39,7 +39,7 @@ const Footer = () => {
       </section>
 
       <section className="text-sm mt-8 space-y-2">
-        <Link to="/yummy_terms" className="hover:text-orange duration-300">الشروط العامة للبيع والإستخدام الخدمات 000000</Link>
+        <Link to="/terms" className="hover:text-orange duration-300">الشروط العامة للبيع والإستخدام الخدمات 000000</Link>
         <p>يمكنك إلغاء إشتراكك في خدمات 000000 بإرسال STOP إلى 00000.</p>
       </section>
 

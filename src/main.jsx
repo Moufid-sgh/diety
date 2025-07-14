@@ -14,7 +14,6 @@ import AboutUs from './pages/AboutUs';
 import Terms from './pages/Terms';
 import Notifications from './pages/Notifications';
 import { useAuth, AuthProvider } from './components/authContext';
-import YummyTerms from './pages/Yummy_terms';
 import Filter from './pages/Filter';
 import Search from './pages/Search';
 
@@ -80,10 +79,6 @@ const router = createBrowserRouter([
       {
         path: 'terms',
         element: <Terms />
-      },
-      {
-        path: 'yummy_terms',
-        element: <YummyTerms />
       },
       {
         path: 'notifications',

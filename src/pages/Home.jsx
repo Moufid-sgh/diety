@@ -12,7 +12,7 @@ const Home = () => {
 
 
   return (
-    <main className="flex min-h-screen flex-col items-center px-3 md:px-8 lg:px-32 lg:py-8 py-4 mt-20 lg:mt-0">
+    <main className="flex min-h-screen flex-col items-center justify-center px-3 md:px-8 lg:px-32 lg:py-8 py-4 mt-20 lg:mt-0">
 
       <Rubrique />
 

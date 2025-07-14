@@ -4,8 +4,8 @@ import { useEffect, useState, useRef } from 'react';
 import SecondPart from '@/components/recipe/SecondPart';
 import Save from "@/components/Save"
 import ErrorBoundary from '@/components/ErrorBoundary';
-import { Separator } from '@radix-ui/react-separator';
 import ProgressBar from '@/components/recipe/ProgressBar';
+import { Skeleton } from "@/components/ui/skeleton"
 
 
 const Recipe = () => {
@@ -37,9 +37,7 @@ const Recipe = () => {
   }, []);
 
   const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [totalLoading, setTotalLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
 
   //fetch data 
@@ -54,15 +52,14 @@ const Recipe = () => {
 
         const result = await response.json();
         setData(result)
-        setTotalLoading(true)
+        setLoading(true)
       } catch (error) {
-        setError(error.message)
-      } finally {
-        setLoading(false)
+        console.log(error)
       }
     };
 
-    fetchData();
+      fetchData();
+
   }, [id]);
 
 
@@ -75,17 +72,22 @@ const Recipe = () => {
         <section className="flex-1">
 
           {/* video fo mobile---------------------------------------------------------------------------*/}
-          {totalLoading && <div className="lg:hidden mb-12 flex justify-center">
-            <div className="relative flex items-center justify-center">
-              <video className="w-[338px] h-[600px]"
-                poster={data?.imgPath}
-                controls
-                preload="metadata">
-                <source src={data?.videoPath} type="video/mp4" />
-              </video>
-              <Save recipeId={data?.id} position="top-1.5 left-1.5" />
+          {!loading ?
+            <div className="relative overflow-hidden cardBorder">
+              <Skeleton className="w-[280px] h-[350px] rounded-[12px]" />
             </div>
-          </div>}
+            :
+            <div className="lg:hidden mb-12 flex justify-center">
+              <div className="relative flex items-center justify-center">
+                <video className="w-[338px] h-[600px]"
+                  poster={data?.imgPath}
+                  controls
+                  preload="metadata">
+                  <source src={data?.videoPath} type="video/mp4" />
+                </video>
+                <Save recipeId={data?.id} position="top-4 left-2.5" />
+              </div>
+            </div>}
 
           <div className="mb-10 lg:mb-0 text-[#262F82]">
             <div className="lg:w-[60%]">
@@ -156,7 +158,7 @@ const Recipe = () => {
 
           {/* ingredient & preparation & steps------------------------------------------------------------ */}
           <ErrorBoundary>
-            {totalLoading && <SecondPart
+            {loading && <SecondPart
               ingredients={data?.ingredients}
               ustensiles={data?.ustensiles}
               nbr_serves={data.nbr_serves}
@@ -172,17 +174,22 @@ const Recipe = () => {
 
 
         {/* video fo desktop---------------------------------------------------------------------------*/}
-        {totalLoading && <div className="hidden lg:block w-[338px]" style={{ height: getHeight }}>
-          <div className="relative flex items-center justify-center lg:sticky lg:top-7">
-            <video className="w-[338px] h-[600px]"
-              poster={data?.imgPath}
-              controls
-              preload="metadata">
-              <source src={data?.videoPath} type="video/mp4" />
-            </video>
-            <Save recipeId={data?.id} position="top-1.5 left-1.5" />
+        {!loading ?
+          <div className="relative overflow-hidden cardBorder">
+            <Skeleton className="w-[280px] h-[350px] rounded-[12px]" />
           </div>
-        </div>}
+          :
+          <div className="hidden lg:block w-[338px]" style={{ height: getHeight }}>
+            <div className="relative flex items-center justify-center lg:sticky lg:top-7">
+              <video className="w-[338px] h-[600px]"
+                poster={data?.imgPath}
+                controls
+                preload="metadata">
+                <source src={data?.videoPath} type="video/mp4" />
+              </video>
+              <Save recipeId={data?.id} position="top-2.5 left-2.5" />
+            </div>
+          </div>}
       </div>
 
 

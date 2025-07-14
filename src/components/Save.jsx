@@ -26,7 +26,7 @@ const Save = ({ recipeId, position }) => {
 
         const getUserRecipe = async () => {
             try {
-                const response = await fetch("https://yahalawa.net/api/orange/getUserRecipe", {
+                const response = await fetch("https://yahalawa.net/api/diet/getUserRecipe", {
                     method: "POST",
                     credentials: 'include',
                     headers: {
@@ -62,7 +62,7 @@ const Save = ({ recipeId, position }) => {
         };
 
         try {
-            const response = await fetch("https://yahalawa.net/api/orange/saveRecipe", {
+            const response = await fetch("https://yahalawa.net/api/diet/saveRecipe", {
                 method: "POST",
                 credentials: 'include',
                 headers: {
@@ -92,7 +92,7 @@ const Save = ({ recipeId, position }) => {
 
 
     return (
-        <div className={`absolute ${position} ${isSaved ? 'bg-[#5E5DC0] text-white' : 'bg-white'} group py-[9px] flex items-center justify-center size-10 z-50 rounded-full shadow-save-btn   text-[#5E5DC0] hover:bg-[#FFEB00] hover:text-white duration-300`}>
+        <div className={`absolute ${position} ${isSaved ? 'bg-[#5E5DC0] text-white' : 'bg-white'} group py-[9px] flex items-center justify-center size-10 z-30 rounded-full shadow-save-btn   text-[#5E5DC0] hover:bg-[#FFEB00] hover:text-white duration-300`}>
             <svg 
             onClick={(e) => {
                 e.stopPropagation();
