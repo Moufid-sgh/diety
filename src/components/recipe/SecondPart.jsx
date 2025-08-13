@@ -7,8 +7,6 @@ import { Separator } from "@/components/ui/separator"
 
 const SecondPart = ({ macro, micro, ingredients, ustensiles, nbr_serves, sortedSteps }) => {
 
-    // console.log("ingredients", ingredients);
-    // console.log("macro", macro);
 
     const setpsRef = useRef(null);
     const ingRef = useRef(null);

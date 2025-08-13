@@ -58,14 +58,20 @@ const Recipe = () => {
       }
     };
 
-      fetchData();
+    fetchData();
 
   }, [id]);
 
 
   const sortedSteps = data?.steps.sort((a, b) => a.step - b.step);
 
+  //get first section
+  let proteines = data?.macro?.find(el => el.title === "بروتينات")
+  let lipides = data?.macro?.find(el => el.title === "دهون")
+  let glucides = data?.macro?.find(el => el.title === "كربوهيدرات")
+  let fibres = data?.macro?.find(el => el.title === "ألياف غذائية")
 
+  
   return (
     <main className="flex min-h-screen flex-col px-6 md:px-8 lg:px-32 pb-12 pt-3 mt-20 lg:mt-0">
       <div dir="rtl" ref={containerRef} className="lg:flex items-start justify-between mt-8 pb-4 w-full">
@@ -124,33 +130,33 @@ const Recipe = () => {
 
               {/* value progress bar ------------------------------------------*/}
               <div className='mb-8'>
-                <ProgressBar
+                {proteines && <ProgressBar
                   title="البروتين"
                   subtitle="Protein | Protéines"
-                  value={data?.proteines}
+                  value={proteines?.value}
                   className="[&>div]:bg-blue"
-                />
+                />}
 
-                <ProgressBar
+                {lipides && <ProgressBar
                   title="الدهون"
                   subtitle="Fat | Lipides"
-                  value={data?.graisses}
+                  value={lipides?.value}
                   className="[&>div]:bg-[#FFEB00]"
-                />
+                />}
 
-                <ProgressBar
+                {glucides && <ProgressBar
                   title="الكربوهيدرات"
                   subtitle="Carbohydrates | Glucides"
-                  value={data?.glucides}
+                  value={glucides?.value}
                   className="[&>div]:bg-[#4CC9FE]"
-                />
+                />}
 
-                <ProgressBar
+                {fibres && <ProgressBar
                   title="الألياف"
                   subtitle="Fiber | Fibres"
-                  value={data?.fibres}
+                  value={fibres?.value}
                   className="[&>div]:bg-[#06E775]"
-                />
+                />}
               </div>
             </div>
           </div>

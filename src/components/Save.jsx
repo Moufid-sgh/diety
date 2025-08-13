@@ -77,9 +77,9 @@ const Save = ({ recipeId, position }) => {
                 setIsSaved((prev) => !prev)
                 setNeedsUpdate((prev) => !prev);
                 if (data.saved) {
-                    return toast.info('برافو عليك ! الوصفة أتسجلت في دوسي الموندو متاعي !')
+                    return toast.info('تم حفظ الوصفة')
                 } else {
-                    return toast.info('أهوكة الوصفة اتنحات من الموندو متاعي !')
+                    return toast.info('تم حذف الوصفة')
                 }
             } else {
                 console.error("save failed:", data.error);
