@@ -47,7 +47,7 @@ const Rubrique = () => {
                             </div>
 
                             {/* recipe card---------------------------------------------------- */}
-                            <RecipeCarousel recipes={el.recipe} />
+                                <RecipeCarousel recipes={el.recipe} />
 
 
                             {/* kcal filter--------------------------------------------------------- */}

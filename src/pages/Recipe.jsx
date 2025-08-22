@@ -123,7 +123,7 @@ const Recipe = () => {
                     </defs>
                   </svg>
                   <span className='mx-1.5'>kcal</span>
-                  <span>{data?.kcal}</span>
+                  <span className='text-3xl'>{data?.kcal}</span>
                 </div>
                 <p className='text-lg'>قيمة السعرات الحرارية للحصة الواحدة</p>
               </div>

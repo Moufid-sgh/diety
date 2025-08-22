@@ -9,10 +9,21 @@ import RecipeCard from './RecipeCard';
         const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false }, [Autoplay({ delay: 3000 })]);
     
         return (
-            <div className="embla pb-10" ref={emblaRef}>
-                <div className="embla__container mt-3">
+            // <div className="embla pb-10" ref={emblaRef}>
+            //     <div className="embla__container mt-3">
+            //         {recipes.map((card) => (
+            //             <div key={card.id} className="embla__slide cursor-pointer">
+            //                 <Suspense fallback={<p>loading...</p>}>
+            //                     <RecipeCard el={card} />
+            //                 </Suspense>
+            //             </div>
+            //         ))}
+            //     </div>
+            // </div>
+            <div className="pb-10" ref={emblaRef}>
+                <div className="flex items-center justify-center mt-3">
                     {recipes.map((card) => (
-                        <div key={card.id} className="embla__slide cursor-pointer">
+                        <div key={card.id} className="cursor-pointer">
                             <Suspense fallback={<p>loading...</p>}>
                                 <RecipeCard el={card} />
                             </Suspense>

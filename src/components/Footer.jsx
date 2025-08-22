@@ -1,11 +1,37 @@
 import googlePlay from "/googlePlay.svg"
 import appStore from "/appStore.svg"
 import { Link } from "react-router-dom"
+import { useState, useEffect } from "react";
 
 
 const Footer = () => {
+
+  const [showButton, setShowButton] = useState(false);
+
+  // Gérer l'affichage du bouton en fonction du défilement
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 2000) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Fonction pour faire défiler vers le haut
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
-    <footer dir='rtl' className="w-full text-[#183153] px-3 md:px-8 lg:px-32 py-8">
+    <footer dir='rtl' className="relative w-full text-[#183153] px-3 md:px-8 lg:px-32 py-8">
       <section>
         <div className="text-sm mb-6">
           <p>مرحبا بيكم على منصتنا ! </p>
@@ -29,7 +55,7 @@ const Footer = () => {
             />
           </Link>
         </div>
-        <p className="mt-2">إحصل الآن على تطبيق000000 !</p>
+        <p className="mt-2">إحصل الآن على تطبيق دايتي !</p>
       </section>
 
       <section className="flex mt-6">
@@ -39,11 +65,21 @@ const Footer = () => {
       </section>
 
       <section className="text-sm mt-8 space-y-2">
-        <Link to="/terms" className="hover:text-orange duration-300">الشروط العامة للبيع والإستخدام الخدمات 000000</Link>
+        <Link to="/terms" className="hover:text-orange duration-300">الشروط العامة للبيع والإستخدام الخدمات دايتي</Link>
         <p>يمكنك إلغاء إشتراكك في خدمات 000000 بإرسال STOP إلى 00000.</p>
       </section>
 
-      <p className="mt-6">جميع حقوق النشر محفوظة لموقع 00000. 00000, علامة ليدر بوب <span>{new Date().getFullYear()} ©</span></p>
+      <p className="mt-6">جميع حقوق النشر محفوظة لموقع دايتي. Diety, علامة ليدر بوب  ©<span>{new Date().getFullYear()} ©</span></p>
+
+      {showButton && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 bg-black text-white size-12 flex items-center justify-center rounded-full shadow-lg hover:bg-blue transition duration-300"
+          aria-label="الذهاب إلى الأعلى"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M15 20H9v-8H4.16L12 4.16L19.84 12H15z" /></svg>
+        </button>
+      )}
     </footer>
   )
 }
