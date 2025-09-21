@@ -3,15 +3,17 @@ import RecipeCarousel from './RecipeCarousel'
 import ErrorBoundary from './ErrorBoundary';
 import RubriqueFilter from './RubriqueFilter';
 import { dataKcal } from "@/lib/tagsData";
+import HomeLoading from "./HomeLoading";
 
 
 const Rubrique = () => {
 
     const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true)
             try {
                 const response = await fetch('https://yahalawa.net/api/diet/topic');
 
@@ -32,6 +34,9 @@ const Rubrique = () => {
     }, []);
 
 
+    if(loading) {
+        return <HomeLoading />
+    }
 
     return (
         <div className='w-full overflow-hidden'>
@@ -39,7 +44,7 @@ const Rubrique = () => {
                 {data?.topic?.map((el, index) => {
 
                     return (
-                        <section key={index} className="w-full mt-6">
+                        <section key={index} className="w-full mt-6 lg:mt-0">
 
                             <div className='text-end'>
                                 <p className='text-[#7695FF] text-3xl mb-2'>{el.title}</p>

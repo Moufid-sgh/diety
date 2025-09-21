@@ -20,7 +20,7 @@ const ImageComponent = ({ src, className }) => {
             <div style={{ display: imageLoaded ? 'none' : 'inline' }}>
                 <Blurhash
                     hash="LSN],,o}WURi?^kCbERiysf4RjWA"
-                    width="280px"
+                    width="320px"
                     height="350px"
                     resolutionX={32}
                     resolutionY={32}

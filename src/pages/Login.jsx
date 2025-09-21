@@ -9,6 +9,7 @@ const Page = () => {
 
     const { setIsAuthenticated, setCurrentName } = useAuth();
 
+
     const [showPassword, setShowPassword] = useState(false)
 
     const [loading, setLoading] = useState(false);
@@ -16,6 +17,9 @@ const Page = () => {
     const [phone_number, setPhone] = useState('')
     const [password, setPassword] = useState('')
     const [isChecked, setIsChecked] = useState(false);
+
+    //check is form valid
+    const isFormValid = phone_number.length >= 8 && password.length >= 4;
 
     //redirection after login
     const navigate = useNavigate();
@@ -26,56 +30,59 @@ const Page = () => {
         e.preventDefault();
         setLoading(true);
 
-            if (!phone_number || !password) {
-                return toast.info('من فضلك، تأكد من ملء جميع الحقول لإكمال تسجيل الدخول')
-            }
+        if (!phone_number || !password) {
+            setLoading(false);
+            return toast.info('من فضلك، تأكد من ملء جميع الحقول لإكمال تسجيل الدخول')
+        }
 
-            if (!isChecked) {
-                return toast.error('يجب قراءة وقبول الشروط والأحكام الخاصة بالاستخدام')
-            }
+        if (!isChecked) {
+            setLoading(false);
+            return toast.error('يجب قراءة وقبول الشروط والأحكام الخاصة بالاستخدام')
+        }
 
-            else {
-                try {
-                    const response = await fetch("https://yahalawa.net/api/diet/auth", {
-                        method: "POST",
-                        credentials: 'include',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json',
-                        },
-                        body: JSON.stringify({ phone_number, password }),
-                    });
+        else {
+            try {
+                const response = await fetch("https://yahalawa.net/api/diet/auth", {
+                    method: "POST",
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    body: JSON.stringify({ phone_number, password }),
+                });
 
-                    const data = await response.json();
+                const data = await response.json();
 
-                    
-                    if (data.status === "error") {
-                        return toast.error("بيانات اعتماد غير صالحة");
-                    }
 
-                    if (response.ok) {
-                        setCurrentName(data.user.name);
-                        localStorage.setItem("name", data.user.name);
-                        localStorage.setItem("phone", data.user.phone_number);
-                        localStorage.setItem("id", data.user.id);
-                        localStorage.setItem('token', data.token);
-                        setIsAuthenticated(true);
-                        navigate(from, { replace: true });
-                    }
-
-                } catch (error) {
-                    console.log(error)
-                } finally {
-                    setLoading(false);
+                if (data.status === "error") {
+                    return toast.error("بيانات اعتماد غير صالحة");
                 }
+
+                if (response.ok) {
+                    console.log("login",data)
+                    setCurrentName(data.user.name);
+                    localStorage.setItem("name", data.user.name);
+                    localStorage.setItem("phone", data.user.phone_number);
+                    localStorage.setItem("id", data.user.id);
+                    localStorage.setItem('token', data.token);
+                    setIsAuthenticated(true);
+                    navigate(from, { replace: true });
+                }
+
+            } catch (error) {
+                console.log(error)
+            } finally {
+                setLoading(false);
             }
+        }
     };
 
 
 
     return (
-        <main className="h-screen w-full md:bg-[url('/login-bg.webp')] bg-cover bg-center bg-no-repeat flex min-h-screen flex-col items-center justify-center px-3 md:px-8 lg:px-32">
-            
+        <main className="h-screen w-full login-bg flex min-h-screen flex-col items-center justify-center px-3 md:px-8 lg:px-32">
+
             <form dir="rtl" className="mt-8 w-full flex justfiy-start">
                 <section className="bg-white lg:w-96 p-8 rounded-[12px] border border-blue">
 
@@ -86,13 +93,13 @@ const Page = () => {
                     </div>
 
                     <div className="relative mt-5">
-                        <label className="text-[#262F82]" htmlFor="number">رقم الجوال إتصالات تونس</label>
+                        <label className="text-[#262F82]" htmlFor="number">رقم الجوال  </label>
                         <input
                             id="number"
                             type="number"
                             name="phone_number"
                             onChange={(e) => setPhone(e.target.value)}
-                            placeholder="رقم الجوال إتصالات تونس"
+                            placeholder="رقم الجوال  "
                             className="bg-[#007AFF0D] border border-[#262F82] rounded-[8px] py-3 px-4 mt-1 w-full outline-none focus:ring-[0.8px] focus:ring-ringblue"
                         />
                         <svg className="absolute left-4 top-[45px] text-[#262F82] size-4" width="12" height="19" viewBox="0 0 12 19" fill="#262F82" xmlns="http://www.w3.org/2000/svg">
@@ -130,12 +137,17 @@ const Page = () => {
                     <Link to="" className="text-[#007AFF]">نسيت كلمة المرور ؟</Link>
 
 
-                    <button onClick={handleSignIn} 
-                            disabled={loading} 
-                            className="flex items-center justify-center px-5 py-2.5 mt-8 bg-[#BAC1CB] hover:bg-[#183153] active:bg-blue duration-500 text-white rounded-[8px] w-full group overflow-hidden font-medium">
+                    <button onClick={handleSignIn}
+                        disabled={loading}
+                        className={`flex items-center justify-center px-5 py-2.5 mt-8 ${isFormValid
+                                ? 'bg-[#183153] hover:bg-[#0f1d2e]'
+                                : 'bg-[#BAC1CB] cursor-not-allowed'
+                            } active:bg-blue duration-500 text-white rounded-[8px] w-full group overflow-hidden font-medium transition-colors`}
+                    >
                         <span className="ml-1.5">الدخول</span>
                         {loading && <Spinner />}
                     </button>
+
 
                     <div className="text-[#007AFF] mt-4 ">
                         <p>تحب تستمتع بالخدمة ؟</p>

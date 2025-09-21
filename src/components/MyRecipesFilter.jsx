@@ -1,4 +1,5 @@
 import { firstTagFilter } from "@/lib/tagsData";
+import { useEffect } from "react";
 
 const MyRecipesFilter = ({ selected = "", onChange }) => {
 
@@ -10,15 +11,30 @@ const MyRecipesFilter = ({ selected = "", onChange }) => {
     }
   };
 
+
   return (
     <div className="w-full">
 
-      <div dir="rtl" className="flex items-center flex-wrap mb-10">
+      <div dir="rtl" className="flex items-center flex-wrap">
+        
+        <label
+          className={`flex items-center justify-center my-2 lg:my-4 md:my-6 ml-6 px-2 lg:px-3 py-2 text-base lg:text-lg rounded-[12px] cursor-pointer duration-300
+            ${selected === "" ? "bg-blue text-white" : "bg-[#7695FF1A] text-[#262F82] hover:bg-blue hover:text-white active:bg-[#262F82]"}`}
+        >
+          <input
+            type="radio"
+            checked={selected === ""} 
+            onChange={() => handleCheck("")} 
+            className="hidden"
+          />
+          <p>كل وصفاتي❤️</p>
+        </label>
+
         {firstTagFilter.map((el, index) => (
           <label
             key={index}
-            className={`flex items-center justify-center my-2 lg:my-4 md:my-6 ml-4 lg:ml-8 px-2 lg:px-3 py-2 text-base lg:text-lg rounded-[12px] cursor-pointer duration-300
-              ${selected.includes(el.info) ? "bg-blue text-white" : "bg-[#7695FF1A] text-[#262F82] hover:bg-blue hover:text-white active:bg-[#262F82]"}`}
+            className={`flex items-center justify-center my-2 lg:my-4 md:my-6 ml-4 lg:ml-6 px-2 lg:px-3 py-2 text-base lg:text-lg rounded-[12px] cursor-pointer duration-300
+              ${(selected.includes(el.info) ||  selected === "كل وصفاتي") ? "bg-blue text-white" : "bg-[#7695FF1A] text-[#262F82] hover:bg-blue hover:text-white active:bg-[#262F82]"}`}
           >
             <input
               type="radio"

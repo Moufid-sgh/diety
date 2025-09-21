@@ -6,7 +6,6 @@ const MyRecipes = () => {
 
   const [meal, setMeal] = useState("")
 
-
   return (
     <main className="flex min-h-screen flex-col items-center px-3 md:px-8 lg:px-32 py-8 mt-20 lg:mt-0">
 

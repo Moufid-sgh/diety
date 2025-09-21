@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 
 const Tabs = ({ modePrepRef, ingRef, setpsRef }) => {
 
-    const [activeTab, setActiveTab] = useState('');
+    const [activeTab, setActiveTab] = useState('القيم الغذائية');
     const isClickingRef = useRef(false);
 
     const tabs = [
@@ -14,13 +14,13 @@ const Tabs = ({ modePrepRef, ingRef, setpsRef }) => {
 
     const handleScrollTo = (ref) => {
         if (ref && ref.current) {
-            isClickingRef.current = true; // Marquer qu'on est en train de cliquer
+            isClickingRef.current = true;
             window.scrollTo({
                 top: ref.current.offsetTop - 48,
                 behavior: 'smooth',
             });
 
-            // Réactiver le scroll listener après l'animation (délai plus long pour être sûr)
+
             setTimeout(() => {
                 isClickingRef.current = false;
             }, 800);
@@ -30,7 +30,6 @@ const Tabs = ({ modePrepRef, ingRef, setpsRef }) => {
     // Fonction pour activer dynamiquement l'onglet en fonction de la position de défilement
     useEffect(() => {
         const handleScroll = () => {
-            // Ne pas changer l'onglet actif si on est en train de cliquer
             if (isClickingRef.current) return;
 
             tabs.forEach((tab) => {
@@ -49,28 +48,32 @@ const Tabs = ({ modePrepRef, ingRef, setpsRef }) => {
     }, [tabs]);
 
     return (
-        <div className="sticky top-0 z-50 lg:w-[80%] flex items-center justify-start bg-[#F5F5F5] rounded-[10px] p-1 text-[17.5px] md:text-[22px]">
-            <div
-                className={`absolute inset-y-1 transition-all duration-200 ease-out bg-blue rounded-[12px] shadow-sm 
+
+            <div className="sticky top-[95px] lg:top-0 z-50 h-16 flex items-center justify-start bg-[#F5F5F5] rounded-[10px] border  shadow-md p-1 text-[17.5px] md:text-[22px]">
+                <div
+                    className={`absolute top-2 inset-y-1 transition-all duration-500 ease-out bg-blue h-12 rounded-[12px] shadow-md
           ${activeTab === 'الطريقة' ? 'left-1 w-[calc(33.33%-4px)]' : ''}
           ${activeTab === 'المكونات' ? 'left-[calc(33.33%+2px)] w-[calc(33.33%-4px)]' : ''}
           ${activeTab === 'القيم الغذائية' ? 'left-[calc(66.66%+2px)] w-[calc(33.33%-4px)]' : ''}`}
-            />
+                />
 
-            {tabs.map((tab) => (
-                <button
-                    key={tab.id}
-                    onClick={() => {
-                        setActiveTab(tab.id);
-                        handleScrollTo(tab.ref);
-                    }}
-                    className={`relative flex-1 py-2 rounded-[12px] transition-colors duration-300 whitespace-nowrap outline-none
+                {tabs.map((tab) => (
+                    <button
+                        key={tab.id}
+                        onClick={() => {
+                            setActiveTab(tab.id);
+                            handleScrollTo(tab.ref);
+                        }}
+                        className={`relative flex-1 py-1.5 rounded-[12px] transition-colors duration-500 whitespace-nowrap outline-none
             ${activeTab === tab.id ? 'text-white' : 'text-[#262F82BA] hover:text-white'}`}
-                >
-                    {tab.label}
-                </button>
-            ))}
-        </div>
+                    >
+                        {tab.label}
+                    </button>
+                ))}
+
+                 {/* shadow */}
+            <div className='absolute bottom-[-12px] w-[98%] h-3 bg-transparent backdrop-blur-sm'></div>
+            </div>
     );
 };
 

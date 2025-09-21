@@ -1,13 +1,16 @@
 import FilterResult from "@/components/filterPage/FilterResult"
+import NoResultPopup from "@/components/filterPage/NoResultPopup"
 import Slider from "@/components/filterPage/Slider"
 import TagsFilter from "@/components/filterPage/TagsFilter"
 import Spinner from "@/components/Spinner"
 import { firstTagFilter, secondTagFilter, thirdTagFilter, fourthTagFilter } from "@/lib/tagsData"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 const TAKE = 12
 
 const Filter = () => {
+
+  const [noResult, setNoResult] = useState(false)
 
   // State for filter options sotred in localStorage
   const [meal, setMeal] = useState(() => {
@@ -52,7 +55,7 @@ const Filter = () => {
   }, [method]);
   useEffect(() => {
     localStorage.setItem("diet", JSON.stringify(diet));
-  }, [diet]);  
+  }, [diet]);
 
   useEffect(() => {
     localStorage.setItem("sliderValues", JSON.stringify(sliderValues));
@@ -68,54 +71,70 @@ const Filter = () => {
   const [hasMore, setHasMore] = useState(true)
 
   const [loading, setLoading] = useState(false);
+  const filterRef = useRef()
+
 
   // submit--------------------------//
-  const handleSearch = async (currentPage = 0) => {
-    setLoading(true);
+const handleSearch = async (currentPage = 0, isLoadMore = false) => {
+  setLoading(true);
 
-    const payload = {
-      meal,
-      ingredient,
-      method,
-      diet,
-      kcalMin: sliderValues[0],
-      kcalMax: sliderValues[1],
-      //for pagination
-      take: TAKE,
-      skip: currentPage * TAKE
-    };
-
-    try {
-      const res = await fetch("https://yahalawa.net/api/diet/filter", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const result = await res.json();
-      //handle pagination & localStorage
-      if (currentPage === 0) {
-        setData(result);
-        localStorage.setItem("recipes", JSON.stringify(result));
-      } else {
-        setData(prev => {
-          const updated = {
-            ...result,
-            recipes: [...(prev.recipes || []), ...result.recipes]
-          };
-          localStorage.setItem("recipes", JSON.stringify(updated));
-          return updated;
+  // Empêcher le scroll seulement pour le "Load More"
+  if (!isLoadMore) {
+    setTimeout(() => {
+       filterRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
         });
-      }
-      setHasMore(result.recipes.length === TAKE)
-      setSubmitted(true);
+    }, 150);
+  }
 
-    } catch (error) {
-      console.error("Error fetching recipes:", error);
-    } finally {
-      setLoading(false);
-    }
+  const payload = {
+    meal,
+    ingredient,
+    method,
+    diet,
+    kcalMin: sliderValues[0],
+    kcalMax: sliderValues[1],
+    take: TAKE,
+    skip: currentPage * TAKE
   };
+
+  try {
+    const res = await fetch("https://yahalawa.net/api/diet/filter", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const result = await res.json();
+    
+    if (result.recipes.length === 0) {
+      setNoResult(true);
+    }
+
+    if (currentPage === 0) {
+      setData(result);
+      localStorage.setItem("recipes", JSON.stringify(result));
+    } else {
+      setData(prev => {
+        const updated = {
+          ...result,
+          recipes: [...(prev.recipes || []), ...result.recipes]
+        };
+        localStorage.setItem("recipes", JSON.stringify(updated));
+        return updated;
+      });
+    }
+    
+    setHasMore(result.recipes.length === TAKE);
+    setSubmitted(true);
+
+  } catch (error) {
+    console.error("Error fetching recipes:", error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   // reset all filters
   const resetFilters = () => {
@@ -139,12 +158,12 @@ const Filter = () => {
   const handleLoadMore = () => {
     const nextPage = page + 1
     setPage(nextPage)
-    handleSearch(nextPage)
+    handleSearch(nextPage, true);
   }
 
 
   return (
-    <main className="flex min-h-screen flex-col items-center px-3 md:px-8 lg:px-32 lg:py-8 py-4 mt-24 lg:mt-0">
+    <main className="flex min-h-screen flex-col px-3 md:px-8 lg:px-32 lg:py-8 py-4 mt-24 lg:mt-0">
 
       {/* dispaly result & reset -------------*/}
       {submitted &&
@@ -157,10 +176,10 @@ const Filter = () => {
             </svg>
           </button>
 
-          <button className='flex items-center bg-blue rounded-[4px] w-[300px] py-2 px-6 hover:bg-[#007AFFCC] duration-300'>
+          <button className='flex items-center bg-blue rounded-[4px] py-2 px-6 hover:bg-[#007AFFCC] duration-300'>
             <div dir="rtl" className='text-white text-lg mr-3'>
               <span className="ml-2">{data.total}</span>
-              <span>وصفة متوفرة وفقًا لخيارات</span>
+              <span>وصفة متوفرة وفقًا للخيارات</span>
             </div>
             <svg width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_4480_731)">
@@ -177,54 +196,65 @@ const Filter = () => {
       }
 
       {/* filter--------------------------- */}
-      <TagsFilter
-        title="اختار وجبتك"
-        data={firstTagFilter}
-        name="meal"
-        selected={meal}
-        onChange={setMeal}
-      />
+      <div>
+        <TagsFilter
+          title="اختار وجبتك"
+          data={firstTagFilter}
+          name="meal"
+          selected={meal}
+          onChange={setMeal}
+        />
 
-      <Slider
-        values={sliderValues}
-        setValues={setSliderValues}
-      />
+        <Slider
+          values={sliderValues}
+          setValues={setSliderValues}
+        />
 
-      <TagsFilter
-        title="وصفات حسب المكونات"
-        data={secondTagFilter}
-        name="ingredient"
-        selected={ingredient}
-        onChange={setIngredient}
-      />
+        <TagsFilter
+          title="وصفات حسب المكونات"
+          data={secondTagFilter}
+          name="ingredient"
+          selected={ingredient}
+          onChange={setIngredient}
+        />
 
-      <TagsFilter
-        title="وصفات حسب طريقة التحضير"
-        data={thirdTagFilter}
-        name="method"
-        selected={method}
-        onChange={setMethod}
-      />
+        <TagsFilter
+          title="وصفات حسب طريقة التحضير"
+          data={thirdTagFilter}
+          name="method"
+          selected={method}
+          onChange={setMethod}
+        />
 
-      <TagsFilter
-        title="وصفات حسب النظام الغذائي"
-        data={fourthTagFilter}
-        name="diet"
-        selected={diet}
-        onChange={setDiet}
-      />
+        <TagsFilter
+          title="وصفات حسب النظام الغذائي"
+          data={fourthTagFilter}
+          name="diet"
+          selected={diet}
+          onChange={setDiet}
+        />
+
+        {/* submit */}
+        {!submitted && <div className="sticky bottom-0 flex justify-end">
+          <button
+            onClick={handleSearch}
+            disabled={loading}
+            className="flex items-center justify-center w-full md:w-2/5 lg:w-1/3 bg-[#183153] hover:bg-[#BAC1CB] active:bg-blue text-white text-lg px-16 py-2.5 my-6 space-x-1.5 rounded-[8px]  transition"
+          >
+            {loading ?
+              <Spinner />
+              :
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentcolor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="m17 17l4 4M3 11a8 8 0 1 0 16 0a8 8 0 0 0-16 0" /></svg>
+            }
+            <span>بحث</span>
+          </button>
+        </div>}
+      </div>
+
+      <div ref={filterRef} className="filter-element"></div>
 
       {/* dispaly submit btn &  result & reset ------------------*/}
-      {!submitted ?
-        <button
-          onClick={handleSearch}
-          disabled={loading}
-          className="flex items-center justify-center bg-[#183153] hover:bg-[#BAC1CB] active:bg-blue text-white text-lg px-10 py-2.5 my-6 space-x-1.5 rounded-[8px]  transition"
-        >
-          {loading && <Spinner />}
-          <span>بحث</span>
-        </button>
-        :
+      {submitted &&
         <div className="flex flex-col lg:flex-row items-end lg:items-center justify-end w-full space-y-2 lg:space-y-0 lg:space-x-8">
           <button onClick={resetFilters} className='flex items-center bg-blue rounded-[4px] w-[220px] py-2 px-6 hover:bg-[#007AFFCC] duration-300'>
             <span className='text-white text-lg mr-3'>إعادة كل الاختيارات</span>
@@ -234,10 +264,10 @@ const Filter = () => {
             </svg>
           </button>
 
-          <button className='flex items-center bg-blue rounded-[4px] w-[300px] py-2 px-6 hover:bg-[#007AFFCC] duration-300'>
+          <button className='flex items-center bg-blue rounded-[4px] w-fit py-2 px-6 hover:bg-[#007AFFCC] duration-300'>
             <div dir="rtl" className='text-white text-lg mr-3'>
               <span className="ml-2">{data.total}</span>
-              <span>وصفة متوفرة وفقًا لخيارات</span>
+              <span>وصفة متوفرة وفقًا للخيارات</span>
             </div>
             <svg width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_4480_731)">
@@ -256,14 +286,19 @@ const Filter = () => {
       {/* results------------- */}
       {submitted && <FilterResult recipes={data.recipes} />}
 
+      {/* no result -----------------*/}
+      <NoResultPopup resetFilters={resetFilters} setNoResult={setNoResult} noResult={noResult} />
+
 
       {hasMore && !loading && Array.isArray(data.recipes) && data.recipes.length > 0 && (
-        <button
-          onClick={handleLoadMore}
-          className="px-6 py-2 my-8 bg-blue text-white rounded-[8px] hover:bg-[#007AFFCC] duration-300 transition"
-        >
-          تحميل المزيد
-        </button>
+        <div className="text-center">
+          <button
+            onClick={handleLoadMore}
+            className="px-6 py-2 my-8 w-fit bg-blue text-white rounded-[8px] hover:bg-[#007AFFCC] duration-300 transition"
+          >
+            تحميل المزيد
+          </button>
+        </div>
       )}
 
     </main>

@@ -26,7 +26,7 @@ const Save = ({ recipeId, position }) => {
 
         const getUserRecipe = async () => {
             try {
-                const response = await fetch("https://yahalawa.net/api/diet/getUserRecipe", {
+                const response = await fetch("https://yahalawa.net/api/diet/mySaves", {
                     method: "POST",
                     credentials: 'include',
                     headers: {
@@ -36,7 +36,7 @@ const Save = ({ recipeId, position }) => {
                 });
 
                 const data = await response.json();
-                const saves = data.recipes.some(el => el.recipeId === recipeId)
+                const saves = data.recipes.some(el => el.id === recipeId)
 
                 if (saves) {
                     setIsSaved(true)

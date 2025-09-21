@@ -34,28 +34,30 @@ const Footer = () => {
     <footer dir='rtl' className="relative w-full text-[#183153] px-3 md:px-8 lg:px-32 py-8">
       <section>
         <div className="text-sm mb-6">
-          <p>مرحبا بيكم على منصتنا ! </p>
+          <p>مرحبا بيكم على دايتي ! </p>
           <p>تحبوا تتمتعوا بأكلات بنينة وتعرفوا في نفس الوقت على السعرات الحرارية وكل المكونات الغذائية لكل وصفة. </p>
           <p>تلقاوا عندنا أحسن الوصفات الصحية مع كل المعلومات الغذائية إلي تحتاجوها. معانا، كل شيء متوازن وبنين !</p>
         </div>
 
-        <div className="flex items-center mb-6 lg:mt-0">
-          <Link to="" className="hover:scale-[1.03] duration-300">
-            <img
-              src={appStore}
-              alt="icon"
-              className="ml-4"
-            />
-          </Link>
+        <div className="flex flex-col mb-6 lg:mt-0">
+          <p>إحصل الآن على تطبيق دايتي !</p>
+          <div className="flex items-center mt-4">
+            <Link to="" className="hover:scale-[1.03] duration-300">
+              <img
+                src={appStore}
+                alt="icon"
+                className="ml-4"
+              />
+            </Link>
 
-          <Link to="" className="hover:scale-[1.03] duration-300">
-            <img
-              src={googlePlay}
-              alt="icon"
-            />
-          </Link>
+            <Link to="" className="hover:scale-[1.03] duration-300">
+              <img
+                src={googlePlay}
+                alt="icon"
+              />
+            </Link>
+          </div>
         </div>
-        <p className="mt-2">إحصل الآن على تطبيق دايتي !</p>
       </section>
 
       <section className="flex mt-6">
@@ -74,10 +76,10 @@ const Footer = () => {
       {showButton && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 bg-black text-white size-12 flex items-center justify-center rounded-full shadow-lg hover:bg-blue transition duration-300"
+          className="fixed bottom-8 right-2 md:right-8 bg-black text-white size-12 flex items-center justify-center rounded-full shadow-lg hover:bg-blue transition duration-300"
           aria-label="الذهاب إلى الأعلى"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M15 20H9v-8H4.16L12 4.16L19.84 12H15z" /></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M18 11.75a.74.74 0 0 1-.53-.22L12 6.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06l6-6a.75.75 0 0 1 1.06 0l6 6a.75.75 0 0 1 0 1.06a.74.74 0 0 1-.53.22" /><path fill="currentColor" d="M12 19.75a.76.76 0 0 1-.75-.75V5a.75.75 0 0 1 1.5 0v14a.76.76 0 0 1-.75.75" /></svg>
         </button>
       )}
     </footer>

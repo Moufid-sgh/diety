@@ -14,7 +14,6 @@ const SecondPart = ({ macro, micro, ingredients, ustensiles, nbr_serves, sortedS
     const modePrepRef = useRef(null);
 
 
-
     const [persons, setPersons] = useState(nbr_serves);
 
     //handle portion
@@ -37,11 +36,6 @@ const SecondPart = ({ macro, micro, ingredients, ustensiles, nbr_serves, sortedS
             return quantity;
         }
     };
-
-    // function formatNumber(quantity) {
-    //     return quantity % 1 === 0 ? quantity : quantity.toFixed(2);
-    // }
-
 
     //display steps by catgeory
     const groupSteps = (data) => {
@@ -94,35 +88,6 @@ const SecondPart = ({ macro, micro, ingredients, ustensiles, nbr_serves, sortedS
     return (
         <div className="mb-20 lg:w-[80%]">
             <div className="w-full mt-10 lg:mt-0">
-                {/* <div
-                    className="sticky top-0 z-50 flex items-center justify-start bg-[#F5F5F5] rounded-[10px] w-fit p-1 text-[17.5px] md:text-[22px]"
-                >
-                    <div className="rounded-[12px] bg-blue text-white px-4 lg:px-6 py-1.5 cursor-pointer whitespace-nowrap">
-                        القيم الغذائية
-                    </div>
-                    <div
-                        onClick={() => {
-                            window.scrollTo({
-                                top: ingRef.current.offsetTop - 30,
-                                behavior: "smooth",
-                            });
-                        }}
-                        className="rounded-[12px] text-[#262F82BA] hover:text-white hover:bg-blue mx-1 lg:mx-4 px-4 lg:px-6 py-1.5 cursor-pointer transition-all duration-300"
-                    >
-                        المكونات
-                    </div>
-                    <div
-                        onClick={() => {
-                            window.scrollTo({
-                                top: setpsRef.current.offsetTop - 30,
-                                behavior: "smooth",
-                            });
-                        }}
-                        className="rounded-[12px] text-[#262F82BA] px-4 lg:px-6 py-1.5 hover:bg-blue hover:text-white transition-all duration-300 cursor-pointer"
-                    >
-                        الطريقة
-                    </div>
-                </div> */}
 
                 <Tabs modePrepRef={modePrepRef} ingRef={ingRef} setpsRef={setpsRef} />
 
@@ -265,7 +230,7 @@ const SecondPart = ({ macro, micro, ingredients, ustensiles, nbr_serves, sortedS
                                         <p className="h-0.5 w-full bg-orange"></p>
                                     </div>
                                 }
-                                <ul className="list-decimal marker:text-orange text-[#00235B] text-[16px] md:text-[18px]">
+                                <ul className=" text-[16px] md:text-[18px]">
                                     {items.map((item, index) => (
                                         <li key={index} className="flex items-center text-darkblue text-[18px] py-2 border-b border-gray space-x-2 lg:space-x-6">
                                             <p className="w-24 lg:w-20">{formatNumber(getUpdatedQuantity(item.qte_gramme))}</p>
@@ -294,18 +259,18 @@ const SecondPart = ({ macro, micro, ingredients, ustensiles, nbr_serves, sortedS
                         <p className='rubriqueTitle'></p>
                     </div>
 
-                    <div className="mt-4 mr-4">
+                    <ol className="mt-4 mr-4 list-decimal">
                         {Object.entries(groupedSteps).map(([title, descriptions]) => (
-                            <div key={title} className="mb-4 text-[#262F82]">
+                            <li key={title} className="mb-4  text-[#262F82]">
                                 {title && <p className="text-lg font-semibold mb-2">{title}</p>}
-                                <ol className="list-decimal marker:text-orange text-[18px]">
+                                <div className="list-decimal text-[18px]">
                                     {descriptions.map((desc, index) => (
-                                        <li key={index} className="mt-3">{desc}</li>
+                                        <p key={index} className="mt-3">- {desc}</p>
                                     ))}
-                                </ol>
-                            </div>
+                                </div>
+                            </li>
                         ))}
-                    </div>
+                    </ol>
                 </section>
             </div>
         </div>

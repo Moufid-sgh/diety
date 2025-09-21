@@ -70,7 +70,7 @@ const MyRecipesData = ({ selected }) => {
   return (
     <>
       {/* recipes--------------------------------------------------------------------------------- */}
-      <section className="flex flex-wrap justify-center items-start w-full my-6">
+      <section className="flex flex-wrap justify-center md:justify-end items-center w-full mt-6">
         <ErrorBoundary>
             {
               filteredData.map((el) => {
@@ -85,8 +85,8 @@ const MyRecipesData = ({ selected }) => {
 
       {
         Array.isArray(filteredData) && (filteredData.length === 0 && !loading) &&
-        <div className='flex justify-end  w-full mt-10'>
-          <p className="text-end bg-[#5684EB] text-white rounded-[8px]  p-2 lg:w-2/3">
+        <div className='flex justify-end  w-full'>
+          <p className="text-end bg-[#5684EB] text-xl text-white rounded-[8px]  p-2 ">
             حاليا، الموندو متاعك، كيفاش أنقولوها، ومن غير نبزيات ... مافيهوش وصفات.
             متنساش، الوصفات إلي يعجبوك أعمل عليهم جام، هكة يتسجللك ديراكت. أوكي
           </p>

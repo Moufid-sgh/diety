@@ -42,7 +42,7 @@ const Search = () => {
                 <p className='rubriqueTitle'></p>
             </div>
 
-            <section className="flex flex-wrap justify-center items-start w-full my-6">
+            <section className="flex flex-wrap justify-center md:justify-end items-center w-full my-6">
                 <ErrorBoundary>
                     {loading ? (
                         <>

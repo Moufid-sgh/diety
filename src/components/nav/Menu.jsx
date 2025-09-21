@@ -9,20 +9,21 @@ const Menu = () => {
     const location = useLocation()
 
     //get user name
-    const { currentName } = useAuth();
+    const { currentName, setUserImage } = useAuth();
 
 
     return (
-        <div className="hidden lg:flex items-center  text-[#262F82]">
-            <Link to="/compte"  className="flex items-center">
+        <div className="hidden lg:flex items-center text-[#262F82]">
+            <Link to="/compte" className={`${location.pathname === "/compte" && "text-blue"} flex items-center hover:text-blue duration-300`}>
                 <Avatar className="size-9 bg-white">
-                    <AvatarImage src="" />
+                    <AvatarImage src={setUserImage} className="object-cover" />
                     <AvatarFallback>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></g></svg>
                     </AvatarFallback>
                 </Avatar>
 
-                {currentName && <span className="mr-2">مرحبا، {currentName}</span>}
+                {currentName && currentName !== "null" && <span>مرحبا، {currentName}</span>}
+
             </Link>
 
     

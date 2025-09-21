@@ -61,7 +61,7 @@ body {
   }
 
   .cardShadow {
-    box-shadow: -4px 4px 32px 4px rgba(0, 1, 0, 0.1);
+    box-shadow: 0px 4px 32px 1px rgba(24, 49, 83, 0.15);
     border-radius: 12px;
   }
 
@@ -105,6 +105,11 @@ body {
     box-shadow: 0px 1px 2px 0px rgba(94, 93, 192, 1) inset;
     border-radius: 8px;
     height: 6px;
+  }
+
+  /* login background */
+  .login-bg {
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
   }
 
   /* like animation */
@@ -166,64 +171,39 @@ body {
 
   /* caroussel------------------------------------- */
   .embla {
-    max-width: 95%;
+    overflow: hidden;
     overflow: hidden;
     margin: auto;
-    --slide-height: 19rem;
-    --slide-spacing: 1rem;
-    --slide-size: 100%;
-    --slide-spacing-sm: 2rem;
-    --slide-size-sm: 50%;
-    --slide-spacing-lg: 2rem;
-    --slide-size-lg: calc(100% / 3);
   }
-
 
   .embla__container {
-    backface-visibility: hidden;
     display: flex;
     align-items: start;
-    touch-action: pan-y pinch-zoom;
-    margin-left: 0;
+    gap: 0;
   }
-
-
-  @media (min-width: 750px) {
-    .embla__container {
-      margin-left: calc(var(--slide-spacing-sm) * -1);
-    }
-  }
-
-  @media (min-width: 1200px) {
-    .embla__container {
-      margin-left: calc(var(--slide-spacing-lg) * -1);
-    }
-  }
-
-
 
   .embla__slide {
+    flex: 0 0 auto;
     min-width: 0;
-    flex: 0 0 var(--slide-size);
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
-  @media (min-width: 750px) {
+  @media (max-width: 639px) {
     .embla__slide {
-      flex: 0 0 var(--slide-size-sm);
-      padding-left: var(--slide-spacing-sm);
+      display: flex;
+      justify-content: center;
+      width: 100%;
     }
   }
 
-  @media (min-width: 1200px) {
-    .embla__slide {
-      flex: 0 0 var(--slide-size-lg);
-      padding-left: var(--slide-spacing-lg);
-    }
-  }
   
+  /* filter btn: filter page */
+  @media (max-width: 768px) {
+    .filter-element {
+      scroll-margin-top: 40px;
+      padding-top: 40px;
+    }
+  }
+
 
 
   .shadow-save-btn {
@@ -242,5 +222,3 @@ body {
 .shadow-progress {
   box-shadow: 0px 2px 6px 1px rgba(218, 218, 218, 0.33) inset;
 }
-
-

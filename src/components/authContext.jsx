@@ -7,6 +7,10 @@ export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(null);
     const [needsUpdate, setNeedsUpdate] = useState(false);
     const [currentName, setCurrentName] = useState('');
+    const [userId, setUserId] = useState('');
+    const [userPhone, setUserPhone] = useState('');
+    const [userImage, setUserImage] = useState('');
+
         
     useEffect(() => {
 
@@ -27,8 +31,10 @@ export const AuthProvider = ({ children }) => {
                 },);
 
                 const data = await response.json();
-                setCurrentName(data.user.name || '');
-
+                setUserId(data.user?.id || '');
+                setCurrentName(data.user?.name || '');
+                setUserPhone(data.user?.phone_number || '');
+                setUserImage(data.user?.image || '');
                 setIsAuthenticated(data.isAuthenticated);
 
             } catch (error) {
@@ -48,7 +54,11 @@ export const AuthProvider = ({ children }) => {
             needsUpdate, 
             setNeedsUpdate,
             currentName,
-            setCurrentName
+            setCurrentName,
+            userId,
+            userPhone,
+            setUserImage,
+            userImage,
         }}>
             {children}
         </AuthContext.Provider>

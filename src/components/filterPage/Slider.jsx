@@ -13,7 +13,7 @@ const Slider = ({ values, setValues }) => {
 
             {/* slider part------------------------- */}
             <div className="flex flex-col items-center justify-center bg-[#F5F5F5] rounded-[12px] p-6 mb-16">
-                <div className="w-[90%] md:w-[65%]">
+                <div className="w-[90%] md:w-[65%] pb-6">
                     <div className="flex justify-between text-[#262F82] text-lg w-full mb-2">
                         <p>{values[0]} kcal</p>
                         <p>{values[1]} kcal</p>

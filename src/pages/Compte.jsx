@@ -1,59 +1,52 @@
 import { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "@/components/authContext"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import Spinner from "@/components/Spinner"
+import ProfileImage from "@/components/ProfileImage"
+import { Skeleton } from "@/components/ui/skeleton"
 
 
 const Page = () => {
 
-    const { setIsAuthenticated, currentName, setCurrentName } = useAuth();
+    const { setIsAuthenticated, currentName, setCurrentName, userId, userPhone } = useAuth();
 
     const navigate = useNavigate()
 
-     const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    //get user name
     const nameRef = useRef()
 
     const [name, setName] = useState('')
-    const [phone, setPhone] = useState('')
-
-    useEffect(() => {
-        const userName = localStorage.getItem('name')
-        const userPhone = localStorage.getItem('phone')
-        setCurrentName(userName)
-        setPhone(userPhone)
-    }, [name])
 
 
     const editUser = async (e) => {
         setLoading(true);
         e.preventDefault()
 
-            try {
-                const response = await fetch("https://yahalawa.net/api/diet/editUser", {
-                    method: "POST",
-                    credentials: 'include',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ phone, name }),
-                });
+        try {
+            const response = await fetch("https://yahalawa.net/api/diet/editUser", {
+                method: "POST",
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ phone: userPhone, name }),
+            });
 
-                const data = await response.json();
+            const data = await response.json();
+            console.log(data)
 
-                if (response.ok) {
-                    localStorage.setItem("name", name)
-                } else {
-                    console.error("edit failed:", data.error);
-                }
-            } catch (error) {
-                console.log(error)
+            if (response.ok) {
+                setCurrentName(data.user.name)
+            } else {
+                console.error("edit failed:", data.error);
             }
-            finally {
-                setLoading(false);
-            }
+        } catch (error) {
+            console.log(error)
+        }
+        finally {
+            setLoading(false);
+        }
     };
 
 
@@ -95,6 +88,9 @@ const Page = () => {
     };
 
 
+    console.log("currentname", currentName)
+
+
     return (
         <main className="flex min-h-screen flex-col items-center px-3 md:px-8 lg:px-32 py-8">
 
@@ -103,19 +99,10 @@ const Page = () => {
                 <p className='rubriqueTitle'></p>
             </div>
 
-            <div dir="rtl" className="mt-8 w-full flex flex-col justfiy-start">
-                <Avatar className="size-20">
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></g></svg>
-                    </AvatarFallback>
-                </Avatar>
-
-                <p className="text-sm text-[#262F826E] mt-2">إتنجم تحمل وإلا تغير صورتك حسابك<br/> بصيغة jpeg أو png. </p>
-            </div>
+            <ProfileImage userId={userId} />
 
             <form dir="rtl" className="mt-8 w-full flex justfiy-start">
-                <section>
+                <section className="w-full sm:w-80">
                     <div className="relative">
                         <label className="text-sm text-[#262F826E]" htmlFor="nom">الإسم</label>
                         <input
@@ -127,17 +114,17 @@ const Page = () => {
                             placeholder="الإسم"
                             className="bg-[#007AFF0D] border border-[#1831536E] rounded-[8px] py-3 px-4 mt-1 w-full outline-none focus:ring-[0.8px] focus:ring-ringblue"
                         />
-                        <p onClick={clearInput} className="absolute top-[41px] left-2 text-black cursor-pointer">&#10005;</p>
+                       {name && <p onClick={clearInput} className="absolute top-[41px] left-2 text-black cursor-pointer">&#10005;</p>}
                     </div>
 
                     <div className="relative mt-5">
-                        <label className="text-sm text-[#262F826E]" htmlFor="number">رقم الجوال إتصالات تونس</label>
+                        <label className="text-sm text-[#262F826E]" htmlFor="number">رقم الجوال</label>
                         <input
                             disabled
                             id="number"
                             type="number"
                             name="phone_number"
-                            placeholder={phone}
+                            placeholder={userPhone}
                             className="bg-[#007AFF0D] border border-[#1831536E] rounded-[8px] py-3 px-4 mt-1 w-full outline-none focus:ring-[0.8px] focus:ring-ringblue"
                         />
                         <svg className="absolute left-4 top-[45px] text-[#1831536E] size-4" width="12" height="19" viewBox="0 0 12 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -146,15 +133,15 @@ const Page = () => {
                     </div>
 
 
-                    <button onClick={editUser} 
-                            disabled={loading} 
-                            className="flex items-center justify-center px-5 py-2.5  mt-8 bg-blue hover:bg-[#31363F3B] active:bg-black duration-500 text-white rounded-[8px] w-full group overflow-hidden font-medium">
+                    <button onClick={editUser}
+                        disabled={loading}
+                        className="flex items-center justify-center px-5 py-2.5  mt-8 bg-blue hover:bg-[#31363F3B] active:bg-black duration-500 text-white rounded-[8px] w-full group overflow-hidden font-medium">
                         <span className="ml-1.5">تغير الاسم</span>
                         {loading && <Spinner />}
                     </button>
 
                     <button onClick={logout}
-                             className="flex items-center justify-center px-5 py-2.5 mt-8 bg-[#BAC1CB] hover:bg-[#183153] active:bg-blue duration-500 text-white rounded-[8px] w-full group overflow-hidden font-medium">
+                        className="flex items-center justify-center px-5 py-2.5 mt-8 bg-[#BAC1CB] hover:bg-[#183153] active:bg-blue duration-500 text-white rounded-[8px] w-full group overflow-hidden font-medium">
                         <span>تسجيل الخروج</span>
                     </button>
                 </section>
